@@ -1,0 +1,252 @@
+version: 1.0
+name: emr
+metadata:
+  displayName: Amazon EMR
+  longDescription: Amazon EMR provides a managed Hadoop framework that makes it easy,
+    fast, and cost-effective to process vast amounts of data across dynamically scalable
+    Amazon EC2 instances. You can also run other popular distributed frameworks such
+    as Apache Spark, HBase, Presto, and Flink in Amazon EMR, and interact with data
+    in other AWS data stores such as Amazon S3 and Amazon DynamoDB.
+  imageUrl: https://s3.amazonaws.com/thp-aws-icons-dev/Analytics_AmazonEMR_LARGE.png
+  documentationUrl: https://aws.amazon.com/documentation/emr/
+  providerDisplayName: Amazon Web Services
+async: optional
+bindable: true
+description: AWS Service Broker - Amazon EMR
+tags:
+- AWS
+plans:
+- name: production
+  metadata:
+    cost: https://aws.amazon.com/emr/pricing/
+    displayName: Production
+    longDescription: Creates an Amazon EMR cluster optimised for production use
+  description: Configuration designed for production deployments
+  free: false
+  parameters:
+  - description: AWS Access Key to authenticate to AWS with.
+    display_group: AWS Account Information
+    name: aws_access_key
+    required: true
+    title: AWS Access Key
+    type: string
+  - description: AWS Secret Key to authenticate to AWS with.
+    display_group: AWS Account Information
+    display_type: password
+    name: aws_secret_key
+    required: true
+    title: AWS Secret Key
+    type: string
+  - description: IAM role ARN for use as Cloudformation Stack Role.
+    display_group: AWS Account Information
+    name: aws_cloudformation_role_arn
+    required: true
+    title: AWS Cloudformation role ARN
+    type: string
+  - default: us-west-2
+    description: AWS Region to create RDS instance in.
+    display_group: AWS Account Information
+    enum:
+    - ap-northeast-1
+    - ap-northeast-2
+    - ap-south-1
+    - ap-southeast-1
+    - ap-southeast-2
+    - ca-central-1
+    - eu-central-1
+    - eu-west-1
+    - eu-west-2
+    - sa-east-1
+    - us-east-1
+    - us-east-2
+    - us-west-1
+    - us-west-2
+    name: region
+    title: AWS Region
+    type: enum
+  - default: awsservicebroker
+    description: Name of the S3 bucket containing the AWS Service Broker Assets
+    display_group: AWS Service Broker Configuration
+    name: SBArtifactS3Bucket
+    required: true
+    title: AWS Service Broker S3 Bucket
+    type: string
+  - default: ''
+    description: Name of the S3 key prefix containing the AWS Service Broker Assets,
+      leave empty if assets are in the root of the bucket
+    display_group: AWS Service Broker Configuration
+    name: SBArtifactS3KeyPrefix
+    required: false
+    title: AWS Service Broker S3 Key Prefix
+    type: string
+  - name: KeyName
+    required: true
+    description: Must be an existing Keyname
+    type: string
+    title: Key Name
+    display_group: AWS Account Information
+  - name: MasterInstanceType
+    required: true
+    description: Instance type to be used for the master instance.
+    type: string
+    default: m3.xlarge
+    title: Master Instance Type
+    display_group: Cluster Sizing
+  - name: CoreInstanceType
+    required: true
+    description: Instance type to be used for core instances.
+    type: string
+    default: m3.xlarge
+    title: Core Instance Type
+    display_group: Cluster Sizing
+  - name: NumberOfCoreInstances
+    required: true
+    description: Must be a valid number
+    type: int
+    default: 2
+    title: Number Of Core Instances
+    display_group: Cluster Sizing
+  - name: VpcId
+    required: true
+    description: Must be a valid VPC ID
+    type: string
+  - name: ReleaseLabel
+    required: true
+    description: Must be a valid EMR release  version
+    default: emr-5.7.0
+    type: string
+    title: Release Label
+    display_group: EMR Settings
+  - name: EMRApplication
+    required: true
+    description: Please select which application will be installed on the cluster
+      this would be either Ganglia and spark, or Ganglia and s3 backed Hbase
+    type: enum
+    enum:
+    - Spark
+    - Hbase
+    default: Spark
+    title: EMR Application
+    display_group: EMR Settings
+- name: custom
+  metadata:
+    cost: https://aws.amazon.com/emr/pricing/
+    displayName: Custom
+    longDescription: Creates an Amazon EMR cluster with a custom configuration
+  description: Custom configuration
+  free: false
+  parameters:
+  - description: AWS Access Key to authenticate to AWS with.
+    display_group: AWS Account Information
+    name: aws_access_key
+    required: true
+    title: AWS Access Key
+    type: string
+  - description: AWS Secret Key to authenticate to AWS with.
+    display_group: AWS Account Information
+    display_type: password
+    name: aws_secret_key
+    required: true
+    title: AWS Secret Key
+    type: string
+  - description: IAM role ARN for use as Cloudformation Stack Role.
+    display_group: AWS Account Information
+    name: aws_cloudformation_role_arn
+    required: true
+    title: AWS Cloudformation role ARN
+    type: string
+  - default: us-west-2
+    description: AWS Region to create RDS instance in.
+    display_group: AWS Account Information
+    enum:
+    - ap-northeast-1
+    - ap-northeast-2
+    - ap-south-1
+    - ap-southeast-1
+    - ap-southeast-2
+    - ca-central-1
+    - eu-central-1
+    - eu-west-1
+    - eu-west-2
+    - sa-east-1
+    - us-east-1
+    - us-east-2
+    - us-west-1
+    - us-west-2
+    name: region
+    title: AWS Region
+    type: enum
+  - default: awsservicebroker
+    description: Name of the S3 bucket containing the AWS Service Broker Assets
+    display_group: AWS Service Broker Configuration
+    name: SBArtifactS3Bucket
+    required: true
+    title: AWS Service Broker S3 Bucket
+    type: string
+  - default: ''
+    description: Name of the S3 key prefix containing the AWS Service Broker Assets,
+      leave empty if assets are in the root of the bucket
+    display_group: AWS Service Broker Configuration
+    name: SBArtifactS3KeyPrefix
+    required: false
+    title: AWS Service Broker S3 Key Prefix
+    type: string
+  - name: EMRClusterName
+    required: true
+    description: Name of the cluster, if set to "Auto" a name will be auto-generated
+    type: string
+    default: Auto
+  - name: KeyName
+    required: true
+    description: Must be an existing Keyname
+    type: string
+    title: Key Name
+    display_group: AWS Account Information
+  - name: MasterInstanceType
+    required: true
+    description: Instance type to be used for the master instance.
+    type: string
+    default: m3.xlarge
+    title: Master Instance Type
+    display_group: Cluster Sizing
+  - name: CoreInstanceType
+    required: true
+    description: Instance type to be used for core instances.
+    type: string
+    default: m3.xlarge
+    title: Core Instance Type
+    display_group: Cluster Sizing
+  - name: NumberOfCoreInstances
+    required: true
+    description: Must be a valid number
+    type: int
+    default: 2
+    title: Number Of Core Instances
+    display_group: Cluster Sizing
+  - name: VpcId
+    required: true
+    description: Must be a valid VPC ID
+    type: string
+  - name: EMRCidr
+    required: true
+    description: CIDR Block for EMR subnet.
+    type: string
+    default: Auto
+  - name: ReleaseLabel
+    required: true
+    description: Must be a valid EMR release  version
+    default: emr-5.7.0
+    type: string
+    title: Release Label
+    display_group: EMR Settings
+  - name: EMRApplication
+    required: true
+    description: Please select which application will be installed on the cluster
+      this would be either Ganglia and spark, or Ganglia and s3 backed Hbase
+    type: enum
+    enum:
+    - Spark
+    - Hbase
+    default: Spark
+    title: EMR Application
+    display_group: EMR Settings

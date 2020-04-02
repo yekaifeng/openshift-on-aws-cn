@@ -1,0 +1,18 @@
+[
+    {
+      "ParameterKey": "InfrastructureName", 
+      "ParameterValue": "greepaas-p22mk"
+    },
+    {
+      "ParameterKey": "VpcCidr", 
+      "ParameterValue": "10.2.0.0/16"
+    },
+    {
+      "ParameterKey": "PrivateSubnets", 
+      "ParameterValue": "subnet-0fb444db4d886d009,subnet-0b93e91f943544f44,subnet-0d51f00147f62f9fd"
+    },
+    {
+      "ParameterKey": "VpcId", 
+      "ParameterValue": "vpc-0338447deb4628091"
+    }
+  ]

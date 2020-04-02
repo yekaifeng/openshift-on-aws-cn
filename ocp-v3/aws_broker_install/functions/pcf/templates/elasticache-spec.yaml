@@ -1,0 +1,494 @@
+version: 1.0
+name: elasticache
+metadata:
+  displayName: Amazon ElastiCache
+  longDescription: Amazon ElastiCache is a web service that makes it easy to set up,
+    manage, and scale distributed in-memory cache environments in the cloud. It provides
+    a high performance, resizeable, and cost-effective in-memory cache, while removing
+    the complexity associated with deploying and managing a distributed cache environment.
+  imageUrl: https://s3.amazonaws.com/thp-aws-icons-dev/Database_AmazonElasticCache_LARGE.png
+  documentationUrl: https://aws.amazon.com/documentation/elasticache/
+  providerDisplayName: Amazon Web Services
+async: optional
+bindable: true
+description: AWS Service Broker - Amazon ElastiCache for memcached
+tags:
+- AWS
+plans:
+- name: production
+  metadata:
+    cost: https://aws.amazon.com/elasticache/pricing/
+    displayName: Production
+    longDescription: Creates an Amazon ElastiCache for memcached, optimised for production
+      use
+  description: Configuration designed for production deployments
+  free: false
+  parameters:
+  - description: AWS Access Key to authenticate to AWS with.
+    display_group: AWS Account Information
+    name: aws_access_key
+    required: true
+    title: AWS Access Key
+    type: string
+  - description: AWS Secret Key to authenticate to AWS with.
+    display_group: AWS Account Information
+    display_type: password
+    name: aws_secret_key
+    required: true
+    title: AWS Secret Key
+    type: string
+  - description: IAM role ARN for use as Cloudformation Stack Role.
+    display_group: AWS Account Information
+    name: aws_cloudformation_role_arn
+    required: true
+    title: AWS Cloudformation role ARN
+    type: string
+  - default: us-west-2
+    description: AWS Region to create RDS instance in.
+    display_group: AWS Account Information
+    enum:
+    - ap-northeast-1
+    - ap-northeast-2
+    - ap-south-1
+    - ap-southeast-1
+    - ap-southeast-2
+    - ca-central-1
+    - eu-central-1
+    - eu-west-1
+    - eu-west-2
+    - sa-east-1
+    - us-east-1
+    - us-east-2
+    - us-west-1
+    - us-west-2
+    name: region
+    title: AWS Region
+    type: enum
+  - default: awsservicebroker
+    description: Name of the S3 bucket containing the AWS Service Broker Assets
+    display_group: AWS Service Broker Configuration
+    name: SBArtifactS3Bucket
+    required: true
+    title: AWS Service Broker S3 Bucket
+    type: string
+  - default: ''
+    description: Name of the S3 key prefix containing the AWS Service Broker Assets,
+      leave empty if assets are in the root of the bucket
+    display_group: AWS Service Broker Configuration
+    name: SBArtifactS3KeyPrefix
+    required: false
+    title: AWS Service Broker S3 Key Prefix
+    type: string
+  - name: VpcId
+    required: true
+    description: The ID of the VPC to launch the Memcache cluster into
+    type: string
+    title: Vpc ID
+    display_group: Network and Security
+  - name: PreferredMaintenanceWindowDay
+    required: true
+    description: The day of the week which ElastiCache maintenance will be performed
+    type: enum
+    default: Mon
+    enum:
+    - Mon
+    - Tue
+    - Wed
+    - Thu
+    - Fri
+    - Sat
+    - Sun
+  - name: PreferredMaintenanceWindowStartTime
+    required: true
+    description: The weekly start time in UTC for the ElastiCache maintenance window,
+      must be less than PreferredMaintenanceWindowEndTime and cannot overlap with
+      PreferredBackupWindow
+    type: enum
+    default: 04:00
+    enum:
+    - 00:00
+    - 01:00
+    - 02:00
+    - 03:00
+    - 04:00
+    - 05:00
+    - 06:00
+    - 07:00
+    - 08:00
+    - 09:00
+    - '10:00'
+    - '11:00'
+    - '12:00'
+    - '13:00'
+    - '14:00'
+    - '15:00'
+    - '16:00'
+    - '17:00'
+    - '18:00'
+    - '19:00'
+    - '20:00'
+    - '21:00'
+    - '22:00'
+    title: Preferred MaintenanceWindow Start Time
+    display_group: Maintenance
+  - name: PreferredMaintenanceWindowEndTime
+    required: true
+    description: The weekly end time in UTC for the ElastiCache maintenance window,
+      must be more than PreferredMaintenanceWindowEndTime and cannot overlap with
+      PreferredBackupWindow
+    type: enum
+    default: 06:00
+    enum:
+    - 00:00
+    - 01:00
+    - 02:00
+    - 03:00
+    - 04:00
+    - 05:00
+    - 06:00
+    - 07:00
+    - 08:00
+    - 09:00
+    - '10:00'
+    - '11:00'
+    - '12:00'
+    - '13:00'
+    - '14:00'
+    - '15:00'
+    - '16:00'
+    - '17:00'
+    - '18:00'
+    - '19:00'
+    - '20:00'
+    - '21:00'
+    - '22:00'
+    title: Preferred Maintenance Window End Time
+    display_group: Maintenance
+  - name: AccessCidr
+    required: true
+    description: CIDR block to allow to connect to database
+    type: string
+    title: Access CIDR
+    display_group: Network and Security
+  - name: CacheNodeType
+    required: true
+    description: The compute and memory capacity of nodes in a cache cluster.
+    type: enum
+    enum:
+    - cache.t2.small
+    - cache.t2.medium
+    - cache.m3.medium
+    - cache.m3.large
+    - cache.m3.xlarge
+    - cache.m3.2xlarge
+    - cache.m4.medium
+    - cache.m4.large
+    - cache.m4.xlarge
+    - cache.m4.2xlarge
+    - cache.m4.4xlarge
+    - cache.m4.10xlarge
+    - cache.r4.large
+    - cache.r4.xlarge
+    - cache.r4.2xlarge
+    - cache.r4.4xlarge
+    - cache.r4.8xlarge
+    default: cache.m4.large
+    title: Cache Node Type
+    display_group: Elasticache Settings
+  - name: EngineVersion
+    required: true
+    description: Family to be used with cluster or parameter group
+    type: enum
+    enum:
+    - 1.4.34
+    - 1.4.33
+    - 1.4.24
+    - 1.4.5
+    default: 1.4.34
+    title: Engine Version
+    display_group: Elasticache Settings
+  - name: NumCacheNodes
+    required: true
+    description: The number of cache nodes in the cluster.
+    type: string
+    default: 3
+    title: Number of Cache Nodes
+    display_group: Elasticache Settings
+- name: custom
+  metadata:
+    cost: https://aws.amazon.com/elasticache/pricing/
+    displayName: Custom
+    longDescription: Creates an Amazon ElastiCache for memcached with custom configuration
+  description: Custom Configuration for Advanced deployments
+  free: false
+  parameters:
+  - description: AWS Access Key to authenticate to AWS with.
+    display_group: AWS Account Information
+    name: aws_access_key
+    required: true
+    title: AWS Access Key
+    type: string
+  - description: AWS Secret Key to authenticate to AWS with.
+    display_group: AWS Account Information
+    display_type: password
+    name: aws_secret_key
+    required: true
+    title: AWS Secret Key
+    type: string
+  - description: IAM role ARN for use as Cloudformation Stack Role.
+    display_group: AWS Account Information
+    name: aws_cloudformation_role_arn
+    required: true
+    title: AWS Cloudformation role ARN
+    type: string
+  - default: us-west-2
+    description: AWS Region to create RDS instance in.
+    display_group: AWS Account Information
+    enum:
+    - ap-northeast-1
+    - ap-northeast-2
+    - ap-south-1
+    - ap-southeast-1
+    - ap-southeast-2
+    - ca-central-1
+    - eu-central-1
+    - eu-west-1
+    - eu-west-2
+    - sa-east-1
+    - us-east-1
+    - us-east-2
+    - us-west-1
+    - us-west-2
+    name: region
+    title: AWS Region
+    type: enum
+  - default: awsservicebroker
+    description: Name of the S3 bucket containing the AWS Service Broker Assets
+    display_group: AWS Service Broker Configuration
+    name: SBArtifactS3Bucket
+    required: true
+    title: AWS Service Broker S3 Bucket
+    type: string
+  - default: ''
+    description: Name of the S3 key prefix containing the AWS Service Broker Assets,
+      leave empty if assets are in the root of the bucket
+    display_group: AWS Service Broker Configuration
+    name: SBArtifactS3KeyPrefix
+    required: false
+    title: AWS Service Broker S3 Key Prefix
+    type: string
+  - name: VpcId
+    required: true
+    description: The ID of the VPC to launch the Memcache cluster into
+    type: string
+    title: Vpc ID
+    display_group: Network and Security
+  - name: NumberOfAvailabilityZones
+    required: true
+    description: Quantity of subnets to use, if selecting more than 2 the region this
+      stack is in must have at least that many Availability Zones
+    type: enum
+    default: 3
+    enum:
+    - '2'
+    - '3'
+    - '4'
+    - '5'
+    title: Number Of Availability Zones
+    display_group: Network and Security
+  - name: PreferredMaintenanceWindowDay
+    required: true
+    description: The day of the week which ElastiCache maintenance will be performed
+    type: enum
+    default: Mon
+    enum:
+    - Mon
+    - Tue
+    - Wed
+    - Thu
+    - Fri
+    - Sat
+    - Sun
+  - name: PreferredMaintenanceWindowStartTime
+    required: true
+    description: The weekly start time in UTC for the ElastiCache maintenance window,
+      must be less than PreferredMaintenanceWindowEndTime and cannot overlap with
+      PreferredBackupWindow
+    type: enum
+    default: 04:00
+    enum:
+    - 00:00
+    - 01:00
+    - 02:00
+    - 03:00
+    - 04:00
+    - 05:00
+    - 06:00
+    - 07:00
+    - 08:00
+    - 09:00
+    - '10:00'
+    - '11:00'
+    - '12:00'
+    - '13:00'
+    - '14:00'
+    - '15:00'
+    - '16:00'
+    - '17:00'
+    - '18:00'
+    - '19:00'
+    - '20:00'
+    - '21:00'
+    - '22:00'
+    title: Preferred MaintenanceWindow Start Time
+    display_group: Maintenance
+  - name: PreferredMaintenanceWindowEndTime
+    required: true
+    description: The weekly end time in UTC for the ElastiCache maintenance window,
+      must be more than PreferredMaintenanceWindowEndTime and cannot overlap with
+      PreferredBackupWindow
+    type: enum
+    default: 06:00
+    enum:
+    - 00:00
+    - 01:00
+    - 02:00
+    - 03:00
+    - 04:00
+    - 05:00
+    - 06:00
+    - 07:00
+    - 08:00
+    - 09:00
+    - '10:00'
+    - '11:00'
+    - '12:00'
+    - '13:00'
+    - '14:00'
+    - '15:00'
+    - '16:00'
+    - '17:00'
+    - '18:00'
+    - '19:00'
+    - '20:00'
+    - '21:00'
+    - '22:00'
+    title: Preferred Maintenance Window End Time
+    display_group: Maintenance
+  - name: AvailabilityZones
+    required: true
+    description: list of availability zones to use, must be the same quantity as specified
+      in NumberOfAvailabilityZones
+    type: string
+    default: Auto
+    title: Availability Zones
+    display_group: Network and Security
+  - name: CidrBlocks
+    required: true
+    description: comma seperated list of CIDR blocks to place ElastiCache into, must
+      be the same quantity as specified in NumberOfAvailabilityZones. If auto is specified
+      unused cidr space in the vpc will be used
+    type: string
+    default: Auto
+    title: CIDR Blocks
+    display_group: Network and Security
+  - name: CidrSize
+    required: true
+    description: Size of Cidr block to allocate if CidrBlocks is set to Auto.
+    type: string
+    default: 26
+    title: CIDR Size
+    display_group: Network and Security
+  - name: AccessCidr
+    required: true
+    description: CIDR block to allow to connect to database
+    type: string
+    title: Access CIDR
+    display_group: Network and Security
+  - name: CacheNodeType
+    required: true
+    description: The compute and memory capacity of nodes in a cache cluster.
+    type: enum
+    enum:
+    - cache.t2.small
+    - cache.t2.medium
+    - cache.m3.medium
+    - cache.m3.large
+    - cache.m3.xlarge
+    - cache.m3.2xlarge
+    - cache.m4.medium
+    - cache.m4.large
+    - cache.m4.xlarge
+    - cache.m4.2xlarge
+    - cache.m4.4xlarge
+    - cache.m4.10xlarge
+    - cache.r4.large
+    - cache.r4.xlarge
+    - cache.r4.2xlarge
+    - cache.r4.4xlarge
+    - cache.r4.8xlarge
+    default: cache.m4.large
+    title: Cache Node Type
+    display_group: Elasticache Settings
+  - name: EngineVersion
+    required: true
+    description: Family to be used with cluster or parameter group
+    type: enum
+    enum:
+    - 1.4.34
+    - 1.4.33
+    - 1.4.24
+    - 1.4.5
+    default: 1.4.34
+    title: Engine Version
+    display_group: Elasticache Settings
+  - name: NumCacheNodes
+    required: true
+    description: The number of cache nodes in the cluster.
+    type: string
+    default: 3
+    title: Number of Cache Nodes
+    display_group: Elasticache Settings
+  - name: ClusterType
+    required: true
+    description: The type of cluster. Specify single-node or multi-node (default).  Number
+      of nodes must be greater than 1 for multi-node
+    type: enum
+    enum:
+    - single-node
+    - multi-node
+    default: multi-node
+    title: Cluster Type
+    display_group: Elasticache Settings
+  - name: AllowVersionUpgrade
+    required: true
+    description: Indicates that minor engine upgrades will be applied automatically
+      to the cache cluster during the maintenance window. The default value is true.
+    type: enum
+    default: 'True'
+    enum:
+    - 'True'
+    - 'False'
+    title: Allow Version Upgrade
+    display_group: Elasticache Settings
+  - name: PortNumber
+    required: true
+    description: The port number for the Cluster to listen on
+    type: int
+    default: 5439
+    title: Port Number
+    display_group: Network and Security
+  - name: AZMode
+    required: true
+    description: Specifies whether the nodes in this Memcached cluster are created
+      in a single Availability Zone or created across multiple Availability Zones
+      in the cluster's region. This parameter is only supported for Memcached cache
+      clusters. If the AZMode and PreferredAvailabilityZones are not specified, ElastiCache
+      assumes single-az mode.
+    type: enum
+    default: cross-az
+    enum:
+    - single-az
+    - cross-az
+    title: AZ Mode
+    display_group: Network and Security

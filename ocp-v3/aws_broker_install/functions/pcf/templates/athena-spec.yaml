@@ -1,0 +1,127 @@
+version: 1.0
+name: athena
+metadata:
+  displayName: Amazon Athena
+  longDescription: Amazon Athena is an interactive query service that makes it easy
+    to analyze data in Amazon S3 using standard SQL. Athena is serverless, so there
+    is no infrastructure to manage, and you pay only for the queries that you run.
+  imageUrl: https://s3.amazonaws.com/awsservicebroker/icons/AmazonAthena_LARGE.png
+  documentationUrl: https://aws.amazon.com/documentation/athena/
+  providerDisplayName: Amazon Web Services
+async: optional
+bindable: true
+description: AWS Service Broker - Amazon Athena.
+tags:
+- AWS
+plans:
+- name: default
+  metadata:
+    cost: https://aws.amazon.com/athena/pricing/
+    displayName: Athena Table
+    longDescription: Athena table using an existing S3 source
+  description: Athena Table
+  free: false
+  parameters:
+  - description: AWS Access Key to authenticate to AWS with.
+    display_group: AWS Account Information
+    name: aws_access_key
+    required: true
+    title: AWS Access Key
+    type: string
+  - description: AWS Secret Key to authenticate to AWS with.
+    display_group: AWS Account Information
+    display_type: password
+    name: aws_secret_key
+    required: true
+    title: AWS Secret Key
+    type: string
+  - description: IAM role ARN for use as Cloudformation Stack Role.
+    display_group: AWS Account Information
+    name: aws_cloudformation_role_arn
+    required: true
+    title: AWS Cloudformation role ARN
+    type: string
+  - default: us-west-2
+    description: AWS Region to create RDS instance in.
+    display_group: AWS Account Information
+    enum:
+    - ap-northeast-1
+    - ap-northeast-2
+    - ap-south-1
+    - ap-southeast-1
+    - ap-southeast-2
+    - ca-central-1
+    - eu-central-1
+    - eu-west-1
+    - eu-west-2
+    - sa-east-1
+    - us-east-1
+    - us-east-2
+    - us-west-1
+    - us-west-2
+    name: region
+    title: AWS Region
+    type: enum
+  - default: awsservicebroker
+    description: Name of the S3 bucket containing the AWS Service Broker Assets
+    display_group: AWS Service Broker Configuration
+    name: SBArtifactS3Bucket
+    required: true
+    title: AWS Service Broker S3 Bucket
+    type: string
+  - default: ''
+    description: Name of the S3 key prefix containing the AWS Service Broker Assets,
+      leave empty if assets are in the root of the bucket
+    display_group: AWS Service Broker Configuration
+    name: SBArtifactS3KeyPrefix
+    required: false
+    title: AWS Service Broker S3 Key Prefix
+    type: string
+  - name: S3Source
+    required: true
+    type: string
+    description: The S3 location for the source data.
+    title: S3 Source
+    display_group: Athena Settings
+  - name: TableColumns
+    required: true
+    type: string
+    description: 'The columns and their types in the format: (col_name data_type [COMMENT
+      col_comment] [, ...] )'
+    title: Table Columns
+    display_group: Athena Settings
+  - name: RowFormat
+    required: true
+    type: enum
+    enum:
+    - DELIMITED
+    - SERDE
+    description: The row format of the source data.
+    title: Row Format
+    display_group: Athena Settings
+  - name: SerdeName
+    required: false
+    type: string
+    description: SERDE Name, only applicable if "Row Format" is set to SERDE.
+    title: SERDE Name
+    display_group: Athena Settings
+  - name: SerdeProperties
+    required: false
+    type: string
+    description: SERDE Properties in the format ("property_name" = "property_value",
+      "property_name" = "property_value" [, ...] ). Only applicable if "Row Format"
+      is set to SERDE.
+    title: SERDE Properties
+    display_group: Athena Settings
+  - name: AthenaDBName
+    required: true
+    type: string
+    description: Athena Database name, will be created if it does not exist
+    title: DB Name
+    display_group: Athena Settings
+  - name: TableName
+    required: true
+    type: string
+    description: Athena table name
+    title: Table Name
+    display_group: Athena Settings

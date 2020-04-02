@@ -1,0 +1,17 @@
+{
+  "Comment": "create wildcard record set for *.apps.openshift.net.cn",
+  "Changes": [
+    {
+      "Action": "CREATE",
+      "ResourceRecordSet": {
+        "Name": "*.apps.greepaas.openshift.net.cn",
+        "Type": "A",
+        "AliasTarget": {
+          "HostedZoneId": "ZM7IZAIOVVDZF",
+          "DNSName": "abbc09df13b2148b1a20ebc3c4497a82-847185455.cn-northwest-1.elb.amazonaws.com.cn",
+          "EvaluateTargetHealth": false
+        }
+      }
+    }
+  ]
+}

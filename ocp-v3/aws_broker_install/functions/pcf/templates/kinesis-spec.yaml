@@ -1,0 +1,109 @@
+version: 1.0
+name: kinesis
+metadata:
+  displayName: Amazon Kinesis
+  longDescription: Amazon Kinesis Data Streams enables you to build custom applications
+    that process or analyze streaming data for specialized needs. Kinesis Data Streams
+    can continuously capture and store terabytes of data per hour from hundreds of
+    thousands of sources such as website clickstreams, financial transactions, social
+    media feeds, IT logs, and location-tracking events.
+  imageUrl: https://s3.amazonaws.com/awsservicebroker/icons/AmazonKinesis_LARGE.png
+  documentationUrl: https://aws.amazon.com/documentation/kinesis/
+  providerDisplayName: Amazon Web Services
+async: optional
+bindable: true
+description: AWS Service Broker - Amazon Kinesis Data Stream
+tags:
+- AWS
+plans:
+- name: default
+  metadata:
+    cost: https://aws.amazon.com/kinesis/pricing/
+    displayName: Standard
+    longDescription: Creates a Kinesis stream
+  description: Amazon Kinesis
+  free: false
+  parameters:
+  - description: AWS Access Key to authenticate to AWS with.
+    display_group: AWS Account Information
+    name: aws_access_key
+    required: true
+    title: AWS Access Key
+    type: string
+  - description: AWS Secret Key to authenticate to AWS with.
+    display_group: AWS Account Information
+    display_type: password
+    name: aws_secret_key
+    required: true
+    title: AWS Secret Key
+    type: string
+  - description: IAM role ARN for use as Cloudformation Stack Role.
+    display_group: AWS Account Information
+    name: aws_cloudformation_role_arn
+    required: true
+    title: AWS Cloudformation role ARN
+    type: string
+  - default: us-west-2
+    description: AWS Region to create RDS instance in.
+    display_group: AWS Account Information
+    enum:
+    - ap-northeast-1
+    - ap-northeast-2
+    - ap-south-1
+    - ap-southeast-1
+    - ap-southeast-2
+    - ca-central-1
+    - eu-central-1
+    - eu-west-1
+    - eu-west-2
+    - sa-east-1
+    - us-east-1
+    - us-east-2
+    - us-west-1
+    - us-west-2
+    name: region
+    title: AWS Region
+    type: enum
+  - default: awsservicebroker
+    description: Name of the S3 bucket containing the AWS Service Broker Assets
+    display_group: AWS Service Broker Configuration
+    name: SBArtifactS3Bucket
+    required: true
+    title: AWS Service Broker S3 Bucket
+    type: string
+  - default: ''
+    description: Name of the S3 key prefix containing the AWS Service Broker Assets,
+      leave empty if assets are in the root of the bucket
+    display_group: AWS Service Broker Configuration
+    name: SBArtifactS3KeyPrefix
+    required: false
+    title: AWS Service Broker S3 Key Prefix
+    type: string
+  - name: RetentionPeriodHours
+    required: true
+    type: string
+    description: The number of hours for the data records that are stored in shards
+      to remain accessible. The default value is 24. For more information about the
+      stream retention period, see Changing the Data Retention Period in the Amazon
+      Kinesis Developer Guide.
+    default: 168
+    title: Retention Period Hours
+    display_group: Kinesis Stream Configuration
+  - name: ShardCount
+    required: true
+    type: string
+    description: The number of shards that the stream uses. For greater provisioned
+      throughput, increase the number of shards.
+    default: 3
+    title: Shard Count
+    display_group: Kinesis Stream Configuration
+  - name: StreamEncrypted
+    required: true
+    description: Indicates whether the Kinesis Stream is encrypted.
+    type: enum
+    default: 'True'
+    enum:
+    - 'True'
+    - 'False'
+    title: Stream Encrypted
+    display_group: Kinesis Stream Configuration

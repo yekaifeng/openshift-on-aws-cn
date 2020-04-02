@@ -1,0 +1,113 @@
+version: 1.0
+name: lex
+metadata:
+  displayName: Amazon Lex
+  longDescription: Amazon Lex is a service for building conversational interfaces
+    into any application using voice and text. Amazon Lex provides the advanced deep
+    learning functionalities of automatic speech recognition (ASR) for converting
+    speech to text, and natural language understanding (NLU) to recognize the intent
+    of the text, to enable you to build applications with highly engaging user experiences
+    and lifelike conversational interactions.
+  imageUrl: https://s3.amazonaws.com/awsservicebroker/icons/AmazonLex_LARGE.png
+  documentationUrl: https://aws.amazon.com/documentation/lex/
+  providerDisplayName: Amazon Web Services
+async: optional
+bindable: true
+description: AWS Service Broker - Amazon Lex
+tags:
+- AWS
+plans:
+- name: default
+  metadata:
+    cost: https://aws.amazon.com/lex/pricing/
+    displayName: Standard
+    longDescription: Creates an Amazon Lex bot
+  description: Amazon Lex
+  free: false
+  parameters:
+  - description: AWS Access Key to authenticate to AWS with.
+    display_group: AWS Account Information
+    name: aws_access_key
+    required: true
+    title: AWS Access Key
+    type: string
+  - description: AWS Secret Key to authenticate to AWS with.
+    display_group: AWS Account Information
+    display_type: password
+    name: aws_secret_key
+    required: true
+    title: AWS Secret Key
+    type: string
+  - description: IAM role ARN for use as Cloudformation Stack Role.
+    display_group: AWS Account Information
+    name: aws_cloudformation_role_arn
+    required: true
+    title: AWS Cloudformation role ARN
+    type: string
+  - default: us-west-2
+    description: AWS Region to create RDS instance in.
+    display_group: AWS Account Information
+    enum:
+    - ap-northeast-1
+    - ap-northeast-2
+    - ap-south-1
+    - ap-southeast-1
+    - ap-southeast-2
+    - ca-central-1
+    - eu-central-1
+    - eu-west-1
+    - eu-west-2
+    - sa-east-1
+    - us-east-1
+    - us-east-2
+    - us-west-1
+    - us-west-2
+    name: region
+    title: AWS Region
+    type: enum
+  - name: SBArtifactS3Bucket
+    required: true
+    default: awsservicebroker
+    type: string
+    description: Name of the S3 bucket containing the AWS Service Broker Assets
+    title: AWS Service Broker Artifact S3 Bucket
+    display_group: AWS Service Broker Configuration
+  - name: SBArtifactS3KeyPrefix
+    required: false
+    type: string
+    description: Name of the S3 key prefix containing the AWS Service Broker Assets,
+      leave empty if assets are in the root of the bucket
+    title: AWS Service Broker Artifact S3 Key Prefix
+    display_group: AWS Service Broker Configuration
+  - name: LexS3Bucket
+    required: false
+    type: string
+    description: Name of the S3 bucket containing the bot and (optionally) intent/custom
+      slot type json documents
+    title: Lex S3 Bucket
+    display_group: Lex Model Configuration
+  - name: IntentsKey
+    required: false
+    type: string
+    description: 'S3 key to a json document containing a list of Lex intents to create
+      for example: [{"name": "intent1", ...}, {"name": "intent2", ...}] . For more
+      information on the intent structure, see https://docs.aws.amazon.com/lex/latest/dg/API_PutIntent.html.
+      If no intents are required leave this field empty'
+    title: Intents S3 Key
+    display_group: Lex Model Configuration
+  - name: CustomSlotTypesKey
+    required: false
+    type: string
+    description: 'S3 key to a json document containing a list of Lex custom slot types
+      to create for example: [{"name": "slot1", ...}, {"name": "slot2", ...}] . For
+      more information on the slot type structure, see https://docs.aws.amazon.com/lex/latest/dg/API_PutSlotType.html.
+      If no custom slot types are required leave this field empty'
+    title: Custom Slot Types S3 Key
+    display_group: Lex Model Configuration
+  - name: BotKey
+    required: true
+    type: string
+    description: S3 key to a json document containing a Lex bot definition to create.
+      For more information on the bot structure, see https://docs.aws.amazon.com/lex/latest/dg/API_PutBot.html.
+    title: Bot S3 Key
+    display_group: Lex Model Configuration

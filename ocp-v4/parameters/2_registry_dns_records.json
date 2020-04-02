@@ -1,0 +1,17 @@
+{
+  "Comment": "create record set for bastion.openshift.net.cn",
+  "Changes": [
+    {
+      "Action": "CREATE",
+      "ResourceRecordSet": {
+        "Name": "bastion.openshift.net.cn",
+        "Type": "A",
+        "AliasTarget": {
+          "HostedZoneId": "ZM7IZAIOVVDZF",
+          "DNSName": "greepaas-registry-21573367.cn-northwest-1.elb.amazonaws.com.cn",
+          "EvaluateTargetHealth": false
+        }
+      }
+    }
+  ]
+}

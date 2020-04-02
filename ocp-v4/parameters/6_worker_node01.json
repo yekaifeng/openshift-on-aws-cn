@@ -1,0 +1,34 @@
+[
+    {
+      "ParameterKey": "InfrastructureName", 
+      "ParameterValue": "greepaas-p22mk"
+    },
+    {
+      "ParameterKey": "RhcosAmi", 
+      "ParameterValue": "ami-0e45959902075ffb5" 
+    },
+    {
+      "ParameterKey": "Subnet", 
+      "ParameterValue": "subnet-0fb444db4d886d009"
+    },
+    {
+      "ParameterKey": "WorkerSecurityGroupId", 
+      "ParameterValue": "sg-003173361e05ab861"
+    },
+    {
+      "ParameterKey": "IgnitionLocation", 
+      "ParameterValue": "https://api-int.greepaas.openshift.net.cn:22623/config/worker"
+    },
+    {
+      "ParameterKey": "CertificateAuthorities", 
+      "ParameterValue": "data:text/plain;charset=utf-8;base64,LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURFRENDQWZpZ0F3SUJBZ0lJZU9BK1VlRGpNSnd3RFFZSktvWklodmNOQVFFTEJRQXdKakVTTUJBR0ExVUUKQ3hNSmIzQmxibk5vYVdaME1SQXdEZ1lEVlFRREV3ZHliMjkwTFdOaE1CNFhEVEl3TURRd01UQTRNVEEwT1ZvWApEVE13TURNek1EQTRNVEEwT1Zvd0pqRVNNQkFHQTFVRUN4TUpiM0JsYm5Ob2FXWjBNUkF3RGdZRFZRUURFd2R5CmIyOTBMV05oTUlJQklqQU5CZ2txaGtpRzl3MEJBUUVGQUFPQ0FROEFNSUlCQ2dLQ0FRRUF5dzI2UE1NZEpNankKZHpWU2dXbzAvd2dQYnpvbzV2WDVSL0x3UVdOTXhSaWs5bFV0Z3RqZ0ZJQ0gwbDE2RVFuUjErWGxCakdYRWIxUApqVWFiemlhNm51UnZNVkt2RkFOOUw5NW9PWmpTK0FGNk5lcUZMNDZUQjlQSDNxYUk5LytrNHBXUFdCUENiTDdWCmtrZ051cXdLWG1uQjR6WHZ4dWU3KzU2bDgvay9STnRBRzRsZnNjSzg4bUFCMllkZDBpNTd6WnBiUjZQNXRqbjYKaEhJQjlIektzcS9LblhQQS91Q3NzN3hmK2hiL251ZTBFNzZ4YW9uTUFOUUl5azEvODk4M29XTm5NcUprUk5vaApmb0tKdnFqNGtBU0Nka1ZyUENtVE1iLzlaa2ZVWEErbm1UQk5wVGlkYXRlcHdWclZlUDNBdmJTSmFIOWtLRFRmCjhyeFZqWGtwY1FJREFRQUJvMEl3UURBT0JnTlZIUThCQWY4RUJBTUNBcVF3RHdZRFZSMFRBUUgvQkFVd0F3RUIKL3pBZEJnTlZIUTRFRmdRVW9XUEdUc3dqeDdXaVhGanJGZFJpUmFUOTdac3dEUVlKS29aSWh2Y05BUUVMQlFBRApnZ0VCQUo5dFZIbCthR2hjUVU1YUFsN0RwWldxelZRZzZHOGJtTThlNDJHZ0ZXS2pKMG82Q0diMERFVFRlMVZvCjY4SWdUZTdWYnJaL2xMS2FqYVdrYnRsSW5wcUtGMFdkbmVwaGxsZldITmlWVmxORmVYZDhnZTVRN0RRcGE0clkKVUhkclJmOEFUYk9TKzk1amN5cGo4WTVKL2tyUEFnM0c3aVRNRVJNcHZKNUxUNHhWaHZRK2xYWGdCdTRJRTRHNQpWMVFoditoZyszVHh4bndBV3lXdHljbzlpcGhRQkt2Umhpbk9oWDZENmlFMFNSb0VzK3VBUzZxQy80R000RExECkowTXE0THlPdXNucElXSHYrekQ5QXo5QkVoV1Q4cEdHelhIakNZV3owRlJWdkl1NGIydXQvLzdNVlJMak1adVYKNGRCaFJyaS9CYm9rZUo1SDczdmtjS1BJa2tFPQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg=="
+    },
+    {
+      "ParameterKey": "WorkerInstanceProfileName", 
+      "ParameterValue": "greepaas-sg-WorkerInstanceProfile-1VRPXUWSU6AZZ"
+    },
+    {
+      "ParameterKey": "WorkerInstanceType", 
+      "ParameterValue": "m4.large" 
+    }
+  ]

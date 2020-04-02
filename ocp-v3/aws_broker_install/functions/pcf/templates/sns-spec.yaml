@@ -1,0 +1,265 @@
+version: 1.0
+name: sns
+metadata:
+  displayName: Amazon SNS
+  longDescription: Amazon Simple Notification Service (Amazon SNS) is a web service
+    that enables applications, end-users, and devices to instantly send and receive
+    notifications from the cloud.
+  imageUrl: https://s3.amazonaws.com/thp-aws-icons-dev/Messaging_AmazonSNS_LARGE.png
+  documentationUrl: https://aws.amazon.com/documentation/sns/
+  providerDisplayName: Amazon Web Services
+async: optional
+bindable: true
+description: AWS Service Broker - Amazon SNS
+tags:
+- AWS
+plans:
+- name: topicwithsub
+  metadata:
+    cost: https://aws.amazon.com/sns/pricing/
+    displayName: Topic and Subscription
+    longDescription: ''
+  description: Deploys an SNS Topic and subscribes an endpoint to it
+  free: false
+  parameters:
+  - description: AWS Access Key to authenticate to AWS with.
+    display_group: AWS Account Information
+    name: aws_access_key
+    required: true
+    title: AWS Access Key
+    type: string
+  - description: AWS Secret Key to authenticate to AWS with.
+    display_group: AWS Account Information
+    display_type: password
+    name: aws_secret_key
+    required: true
+    title: AWS Secret Key
+    type: string
+  - description: IAM role ARN for use as Cloudformation Stack Role.
+    display_group: AWS Account Information
+    name: aws_cloudformation_role_arn
+    required: true
+    title: AWS Cloudformation role ARN
+    type: string
+  - default: us-west-2
+    description: AWS Region to create RDS instance in.
+    display_group: AWS Account Information
+    enum:
+    - ap-northeast-1
+    - ap-northeast-2
+    - ap-south-1
+    - ap-southeast-1
+    - ap-southeast-2
+    - ca-central-1
+    - eu-central-1
+    - eu-west-1
+    - eu-west-2
+    - sa-east-1
+    - us-east-1
+    - us-east-2
+    - us-west-1
+    - us-west-2
+    name: region
+    title: AWS Region
+    type: enum
+  - default: awsservicebroker
+    description: Name of the S3 bucket containing the AWS Service Broker Assets
+    display_group: AWS Service Broker Configuration
+    name: SBArtifactS3Bucket
+    required: true
+    title: AWS Service Broker S3 Bucket
+    type: string
+  - default: ''
+    description: Name of the S3 key prefix containing the AWS Service Broker Assets,
+      leave empty if assets are in the root of the bucket
+    display_group: AWS Service Broker Configuration
+    name: SBArtifactS3KeyPrefix
+    required: false
+    title: AWS Service Broker S3 Key Prefix
+    type: string
+  - name: SubscriptionEndPoint
+    required: false
+    type: string
+    description: The endpoint that receives notifications from the Amazon SNS topic.
+      If left blank no subscription will be added to the topic. The endpoint value
+      depends on the protocol that you specify. This could be a URL, ARN or SMS-capable
+      telephone number.
+    title: Subscription EndPoint
+    display_group: SNS Configuration
+  - name: SubscriptionProtocol
+    required: true
+    type: enum
+    description: 'The subscription''s protocol. Examples: "http", "https", "email",
+      "email-json", "sms", "sqs", "application", "lambda".'
+    default: sqs
+    enum:
+    - ''
+    - http
+    - https
+    - email
+    - email-json
+    - sms
+    - sqs
+    - application
+    - lambda
+    title: Subscription Protocol
+    display_group: SNS Configuration
+- name: topic
+  metadata:
+    cost: https://aws.amazon.com/sns/pricing/
+    displayName: Topic
+    longDescription: ''
+  description: Deploys an SNS Topic
+  free: false
+  parameters:
+  - description: AWS Access Key to authenticate to AWS with.
+    display_group: AWS Account Information
+    name: aws_access_key
+    required: true
+    title: AWS Access Key
+    type: string
+  - description: AWS Secret Key to authenticate to AWS with.
+    display_group: AWS Account Information
+    display_type: password
+    name: aws_secret_key
+    required: true
+    title: AWS Secret Key
+    type: string
+  - description: IAM role ARN for use as Cloudformation Stack Role.
+    display_group: AWS Account Information
+    name: aws_cloudformation_role_arn
+    required: true
+    title: AWS Cloudformation role ARN
+    type: string
+  - default: us-west-2
+    description: AWS Region to create RDS instance in.
+    display_group: AWS Account Information
+    enum:
+    - ap-northeast-1
+    - ap-northeast-2
+    - ap-south-1
+    - ap-southeast-1
+    - ap-southeast-2
+    - ca-central-1
+    - eu-central-1
+    - eu-west-1
+    - eu-west-2
+    - sa-east-1
+    - us-east-1
+    - us-east-2
+    - us-west-1
+    - us-west-2
+    name: region
+    title: AWS Region
+    type: enum
+  - default: awsservicebroker
+    description: Name of the S3 bucket containing the AWS Service Broker Assets
+    display_group: AWS Service Broker Configuration
+    name: SBArtifactS3Bucket
+    required: true
+    title: AWS Service Broker S3 Bucket
+    type: string
+  - default: ''
+    description: Name of the S3 key prefix containing the AWS Service Broker Assets,
+      leave empty if assets are in the root of the bucket
+    display_group: AWS Service Broker Configuration
+    name: SBArtifactS3KeyPrefix
+    required: false
+    title: AWS Service Broker S3 Key Prefix
+    type: string
+- name: subscription
+  metadata:
+    cost: https://aws.amazon.com/sns/pricing/
+    displayName: Subscription
+    longDescription: ''
+  description: Deploys an SNS Subscription to an existing topic
+  free: false
+  parameters:
+  - description: AWS Access Key to authenticate to AWS with.
+    display_group: AWS Account Information
+    name: aws_access_key
+    required: true
+    title: AWS Access Key
+    type: string
+  - description: AWS Secret Key to authenticate to AWS with.
+    display_group: AWS Account Information
+    display_type: password
+    name: aws_secret_key
+    required: true
+    title: AWS Secret Key
+    type: string
+  - description: IAM role ARN for use as Cloudformation Stack Role.
+    display_group: AWS Account Information
+    name: aws_cloudformation_role_arn
+    required: true
+    title: AWS Cloudformation role ARN
+    type: string
+  - default: us-west-2
+    description: AWS Region to create RDS instance in.
+    display_group: AWS Account Information
+    enum:
+    - ap-northeast-1
+    - ap-northeast-2
+    - ap-south-1
+    - ap-southeast-1
+    - ap-southeast-2
+    - ca-central-1
+    - eu-central-1
+    - eu-west-1
+    - eu-west-2
+    - sa-east-1
+    - us-east-1
+    - us-east-2
+    - us-west-1
+    - us-west-2
+    name: region
+    title: AWS Region
+    type: enum
+  - default: awsservicebroker
+    description: Name of the S3 bucket containing the AWS Service Broker Assets
+    display_group: AWS Service Broker Configuration
+    name: SBArtifactS3Bucket
+    required: true
+    title: AWS Service Broker S3 Bucket
+    type: string
+  - default: ''
+    description: Name of the S3 key prefix containing the AWS Service Broker Assets,
+      leave empty if assets are in the root of the bucket
+    display_group: AWS Service Broker Configuration
+    name: SBArtifactS3KeyPrefix
+    required: false
+    title: AWS Service Broker S3 Key Prefix
+    type: string
+  - name: SubscriptionEndPoint
+    required: false
+    type: string
+    description: The endpoint that receives notifications from the Amazon SNS topic.
+      If left blank no subscription will be added to the topic. The endpoint value
+      depends on the protocol that you specify. This could be a URL, ARN or SMS-capable
+      telephone number.
+    title: Subscription EndPoint
+    display_group: SNS Configuration
+  - name: SubscriptionProtocol
+    required: true
+    type: enum
+    description: 'The subscription''s protocol. Examples: "http", "https", "email",
+      "email-json", "sms", "sqs", "application", "lambda".'
+    default: sqs
+    enum:
+    - ''
+    - http
+    - https
+    - email
+    - email-json
+    - sms
+    - sqs
+    - application
+    - lambda
+    title: Subscription Protocol
+    display_group: SNS Configuration
+  - name: ExistingTopicArn
+    required: false
+    type: string
+    description: If not creating a topic, define the arn for an existing topic
+    title: Existing Topic ARN
+    display_group: SNS Configuration

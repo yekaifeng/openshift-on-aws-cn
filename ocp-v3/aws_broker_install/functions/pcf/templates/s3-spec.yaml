@@ -1,0 +1,226 @@
+version: 1.0
+name: s3
+metadata:
+  displayName: Amazon S3
+  longDescription: Amazon Simple Storage Service (Amazon S3) is storage for the Internet.
+    You can use Amazon S3 to store and retrieve any amount of data at any time, from
+    anywhere on the web. You can accomplish these tasks using the simple and intuitive
+    web interface of the AWS Management Console.
+  imageUrl: https://s3.amazonaws.com/thp-aws-icons-dev/Storage_AmazonS3_LARGE.png
+  documentationUrl: https://aws.amazon.com/documentation/s3/'
+  providerDisplayName: Amazon Web Services
+async: optional
+bindable: true
+description: AWS Service Broker - Amazon S3
+tags:
+- AWS
+plans:
+- name: production
+  metadata:
+    cost: https://aws.amazon.com/s3/pricing/
+    displayName: Production
+    longDescription: Amazon Simple Storage Service (Amazon S3) is storage for the
+      Internet. You can use Amazon S3 to store and retrieve any amount of data at
+      any time, from anywhere on the web. You can accomplish these tasks using the
+      simple and intuitive web interface of the AWS Management Console.
+  description: S3 Bucket pre-configured with production best practices
+  free: false
+  parameters:
+  - description: AWS Access Key to authenticate to AWS with.
+    display_group: AWS Account Information
+    name: aws_access_key
+    required: true
+    title: AWS Access Key
+    type: string
+  - description: AWS Secret Key to authenticate to AWS with.
+    display_group: AWS Account Information
+    display_type: password
+    name: aws_secret_key
+    required: true
+    title: AWS Secret Key
+    type: string
+  - description: IAM role ARN for use as Cloudformation Stack Role.
+    display_group: AWS Account Information
+    name: aws_cloudformation_role_arn
+    required: true
+    title: AWS Cloudformation role ARN
+    type: string
+  - default: us-west-2
+    description: AWS Region to create RDS instance in.
+    display_group: AWS Account Information
+    enum:
+    - ap-northeast-1
+    - ap-northeast-2
+    - ap-south-1
+    - ap-southeast-1
+    - ap-southeast-2
+    - ca-central-1
+    - eu-central-1
+    - eu-west-1
+    - eu-west-2
+    - sa-east-1
+    - us-east-1
+    - us-east-2
+    - us-west-1
+    - us-west-2
+    name: region
+    title: AWS Region
+    type: enum
+  - default: awsservicebroker
+    description: Name of the S3 bucket containing the AWS Service Broker Assets
+    display_group: AWS Service Broker Configuration
+    name: SBArtifactS3Bucket
+    required: true
+    title: AWS Service Broker S3 Bucket
+    type: string
+  - default: ''
+    description: Name of the S3 key prefix containing the AWS Service Broker Assets,
+      leave empty if assets are in the root of the bucket
+    display_group: AWS Service Broker Configuration
+    name: SBArtifactS3KeyPrefix
+    required: false
+    title: AWS Service Broker S3 Key Prefix
+    type: string
+- name: custom
+  metadata:
+    cost: https://aws.amazon.com/s3/pricing/
+    displayName: Custom
+    longDescription: Amazon Simple Storage Service (Amazon S3) is storage for the
+      Internet. You can use Amazon S3 to store and retrieve any amount of data at
+      any time, from anywhere on the web. You can accomplish these tasks using the
+      simple and intuitive web interface of the AWS Management Console.
+  description: S3 Bucket pre-configured with custom configuration
+  free: false
+  parameters:
+  - description: AWS Access Key to authenticate to AWS with.
+    display_group: AWS Account Information
+    name: aws_access_key
+    required: true
+    title: AWS Access Key
+    type: string
+  - description: AWS Secret Key to authenticate to AWS with.
+    display_group: AWS Account Information
+    display_type: password
+    name: aws_secret_key
+    required: true
+    title: AWS Secret Key
+    type: string
+  - description: IAM role ARN for use as Cloudformation Stack Role.
+    display_group: AWS Account Information
+    name: aws_cloudformation_role_arn
+    required: true
+    title: AWS Cloudformation role ARN
+    type: string
+  - default: us-west-2
+    description: AWS Region to create RDS instance in.
+    display_group: AWS Account Information
+    enum:
+    - ap-northeast-1
+    - ap-northeast-2
+    - ap-south-1
+    - ap-southeast-1
+    - ap-southeast-2
+    - ca-central-1
+    - eu-central-1
+    - eu-west-1
+    - eu-west-2
+    - sa-east-1
+    - us-east-1
+    - us-east-2
+    - us-west-1
+    - us-west-2
+    name: region
+    title: AWS Region
+    type: enum
+  - default: awsservicebroker
+    description: Name of the S3 bucket containing the AWS Service Broker Assets
+    display_group: AWS Service Broker Configuration
+    name: SBArtifactS3Bucket
+    required: true
+    title: AWS Service Broker S3 Bucket
+    type: string
+  - default: ''
+    description: Name of the S3 key prefix containing the AWS Service Broker Assets,
+      leave empty if assets are in the root of the bucket
+    display_group: AWS Service Broker Configuration
+    name: SBArtifactS3KeyPrefix
+    required: false
+    title: AWS Service Broker S3 Key Prefix
+    type: string
+  - name: BucketName
+    required: true
+    description: Must contain only lowercase letters, numbers, periods (.), and hyphens.
+      If set to Auto, a bucket name will be generated (-),Cannot end in numbers
+    type: string
+    default: Auto
+    title: BucketName
+    display_group: S3 Bucket Settings
+  - name: LoggingPrefix
+    required: true
+    description: Must contain only lowercase letters, numbers, periods (.), and hyphens
+      (-),Cannot end in numbers
+    type: string
+    default: Archive
+    title: Logging Prefix
+    display_group: S3 Bucket Settings
+  - name: EnableLogging
+    required: true
+    description: enable or discable S3 logging
+    type: enum
+    enum:
+    - 'True'
+    - 'False'
+    default: 'True'
+    title: Enable Logging
+    display_group: S3 Bucket Settings
+  - name: EnableGlacierLifeCycle
+    required: true
+    description: enable archiving to Glacier Storage
+    type: enum
+    enum:
+    - 'True'
+    - 'False'
+    default: 'False'
+    title: Enable Glacier LifeCycle
+    display_group: S3 Bucket Settings
+  - name: GlacierLifeCycleTransitionInDays
+    required: true
+    description: Define how many days objects should exist before being moved to Glacier
+    type: string
+    default: 0
+    title: Glacier LifeCycle Transition In Days
+    display_group: S3 Bucket Settings
+  - name: EnableVersioning
+    required: true
+    description: enable versioning
+    type: enum
+    enum:
+    - 'True'
+    - 'False'
+    default: 'False'
+    title: Enable Versioning
+    display_group: S3 Bucket Settings
+  - name: LifeCyclePrefix
+    required: true
+    description: Must contain only lowercase letters, numbers, periods (.), and hyphens
+      (-),Cannot end in numbers
+    type: string
+    default: Archive
+    title: LifeCycle Prefix
+    display_group: S3 Bucket Settings
+  - name: BucketAccessControl
+    required: true
+    description: define if the bucket can be accessed from public or private locations
+    type: enum
+    enum:
+    - Private
+    - PublicRead
+    - PublicReadWrite
+    - AuthenticatedRead
+    - LogDeliveryWrite
+    - BucketOwnerRead
+    - BucketOwnerFullControl
+    - AwsExecRead
+    default: Private
+    title: Bucket Access Control
+    display_group: S3 Bucket Settings

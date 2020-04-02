@@ -1,0 +1,50 @@
+[
+    {
+      "ParameterKey": "InfrastructureName", 
+      "ParameterValue": "greepaas-p22mk"
+    },
+    {
+      "ParameterKey": "RhcosAmi", 
+      "ParameterValue": "ami-0e45959902075ffb5"
+    },
+    {
+      "ParameterKey": "AllowedBootstrapSshCidr", 
+      "ParameterValue": "0.0.0.0/0" 
+    },
+    {
+      "ParameterKey": "PublicSubnet", 
+      "ParameterValue": "subnet-00e0f75140e896e55"
+    },
+    {
+      "ParameterKey": "MasterSecurityGroupId", 
+      "ParameterValue": "sg-08eed6269822571d2"
+    },
+    {
+      "ParameterKey": "VpcId", 
+      "ParameterValue": "vpc-0338447deb4628091"
+    },
+    {
+      "ParameterKey": "BootstrapIgnitionLocation", 
+      "ParameterValue": "s3://greepaas-cn-northwest-1/greepaas-p22mk/bootstrap.ign"
+    },
+    {
+      "ParameterKey": "AutoRegisterELB", 
+      "ParameterValue": "yes" 
+    },
+    {
+      "ParameterKey": "RegisterNlbIpTargetsLambdaArn", 
+      "ParameterValue": "arn:aws-cn:lambda:cn-northwest-1:961163908085:function:greepaas-elb-dns-RegisterNlbIpTargets-X50ZDCAWUK3Q"
+    },
+    {
+      "ParameterKey": "ExternalApiTargetGroupArn", 
+      "ParameterValue": "arn:aws-cn:elasticloadbalancing:cn-northwest-1:961163908085:targetgroup/greep-Exter-17J2NQDC6GO0V/706a5acf951a14f3"
+    },
+    {
+      "ParameterKey": "InternalApiTargetGroupArn", 
+      "ParameterValue": "arn:aws-cn:elasticloadbalancing:cn-northwest-1:961163908085:targetgroup/greep-Inter-1MG1HQTNIBQ11/4029e77583e9dd4e"
+    },
+    {
+      "ParameterKey": "InternalServiceTargetGroupArn", 
+      "ParameterValue": "arn:aws-cn:elasticloadbalancing:cn-northwest-1:961163908085:targetgroup/greep-Inter-S8KUXKIXHK7L/a78aa7106616bc00"
+    }
+  ]

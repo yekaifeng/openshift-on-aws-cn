@@ -1,0 +1,262 @@
+version: 1.0
+name: sqs
+metadata:
+  displayName: Amazon SQS
+  longDescription: Amazon Simple Queue Service (Amazon SQS) is a fully managed message
+    queuing service that makes it easy to decouple and scale microservices, distributed
+    systems, and serverless applications. Amazon SQS moves data between distributed
+    application components and helps you decouple these components."
+  imageUrl: https://s3.amazonaws.com/thp-aws-icons-dev/Messaging_AmazonSQS_LARGE.png
+  documentationUrl: https://aws.amazon.com/documentation/sqs/
+  providerDisplayName: Amazon Web Services
+async: optional
+bindable: true
+description: AWS Servicebroker - Amazon SQS
+tags:
+- AWS
+plans:
+- name: standard
+  metadata:
+    cost: https://aws.amazon.com/sqs/pricing/
+    displayName: Standard
+    longDescription: Managed Standard SQS Queue
+  description: SQS Queue (Standard)
+  free: false
+  parameters:
+  - description: AWS Access Key to authenticate to AWS with.
+    display_group: AWS Account Information
+    name: aws_access_key
+    required: true
+    title: AWS Access Key
+    type: string
+  - description: AWS Secret Key to authenticate to AWS with.
+    display_group: AWS Account Information
+    display_type: password
+    name: aws_secret_key
+    required: true
+    title: AWS Secret Key
+    type: string
+  - description: IAM role ARN for use as Cloudformation Stack Role.
+    display_group: AWS Account Information
+    name: aws_cloudformation_role_arn
+    required: true
+    title: AWS Cloudformation role ARN
+    type: string
+  - default: us-west-2
+    description: AWS Region to create RDS instance in.
+    display_group: AWS Account Information
+    enum:
+    - ap-northeast-1
+    - ap-northeast-2
+    - ap-south-1
+    - ap-southeast-1
+    - ap-southeast-2
+    - ca-central-1
+    - eu-central-1
+    - eu-west-1
+    - eu-west-2
+    - sa-east-1
+    - us-east-1
+    - us-east-2
+    - us-west-1
+    - us-west-2
+    name: region
+    title: AWS Region
+    type: enum
+  - default: awsservicebroker
+    description: Name of the S3 bucket containing the AWS Service Broker Assets
+    display_group: AWS Service Broker Configuration
+    name: SBArtifactS3Bucket
+    required: true
+    title: AWS Service Broker S3 Bucket
+    type: string
+  - default: ''
+    description: Name of the S3 key prefix containing the AWS Service Broker Assets,
+      leave empty if assets are in the root of the bucket
+    display_group: AWS Service Broker Configuration
+    name: SBArtifactS3KeyPrefix
+    required: false
+    title: AWS Service Broker S3 Key Prefix
+    type: string
+  - name: DelaySeconds
+    required: true
+    description: The Id of the AMI you wish to launch the instance from.
+    type: int
+    default: 5
+    title: Delay Seconds
+    display_group: SQS Configuration
+  - name: MaximumMessageSize
+    required: true
+    type: int
+    description: The limit of how many bytes that a message can contain before Amazon
+      SQS rejects it, 1024 bytes (1 KiB) to 262144 bytes (256 KiB)
+    default: 262144
+    title: Maximum Message Size
+    display_group: SQS Configuration
+  - name: MessageRetentionPeriod
+    required: true
+    description: The number of seconds that Amazon SQS retains a message. You can
+      specify an integer value from 60 seconds (1 minute) to 1209600 seconds (14 days).
+    type: int
+    default: 345600
+    title: Message Retention Period
+    display_group: SQS Configuration
+  - name: ReceiveMessageWaitTimeSeconds
+    required: true
+    description: Specifies the duration, in seconds, that the ReceiveMessage action
+      call waits until a message is in the queue in order to include it in the response,
+      as opposed to returning an empty response if a message is not yet available.
+      1 to 20
+    type: int
+    default: 0
+    title: Receive Message Wait Time Seconds
+    display_group: SQS Configuration
+  - name: UsedeadletterQueue
+    required: true
+    description: A dead-letter queue is a queue that other (source) queues can target
+      for messages that can't be processed (consumed) successfully. You can set aside
+      and isolate these messages in the dead-letter queue to determine why their processing
+      doesn't succeed.
+    type: enum
+    enum:
+    - 'true'
+    - 'false'
+    default: 'false'
+    title: Use Dead Letter Queue
+    display_group: SQS Configuration
+  - name: VisibilityTimeout
+    required: true
+    description: This should be longer than the time it would take to process and
+      delete a message, this should not exceed 12 hours.
+    type: int
+    default: 5
+    title: Visibility Timeout
+    display_group: SQS Configuration
+- name: fifo
+  metadata:
+    cost: https://aws.amazon.com/sqs/pricing/
+    displayName: FIFO
+    longDescription: Managed FIFO SQS Queue
+  description: SQS Queue (FIFO)
+  free: false
+  parameters:
+  - description: AWS Access Key to authenticate to AWS with.
+    display_group: AWS Account Information
+    name: aws_access_key
+    required: true
+    title: AWS Access Key
+    type: string
+  - description: AWS Secret Key to authenticate to AWS with.
+    display_group: AWS Account Information
+    display_type: password
+    name: aws_secret_key
+    required: true
+    title: AWS Secret Key
+    type: string
+  - description: IAM role ARN for use as Cloudformation Stack Role.
+    display_group: AWS Account Information
+    name: aws_cloudformation_role_arn
+    required: true
+    title: AWS Cloudformation role ARN
+    type: string
+  - default: us-west-2
+    description: AWS Region to create RDS instance in.
+    display_group: AWS Account Information
+    enum:
+    - ap-northeast-1
+    - ap-northeast-2
+    - ap-south-1
+    - ap-southeast-1
+    - ap-southeast-2
+    - ca-central-1
+    - eu-central-1
+    - eu-west-1
+    - eu-west-2
+    - sa-east-1
+    - us-east-1
+    - us-east-2
+    - us-west-1
+    - us-west-2
+    name: region
+    title: AWS Region
+    type: enum
+  - default: awsservicebroker
+    description: Name of the S3 bucket containing the AWS Service Broker Assets
+    display_group: AWS Service Broker Configuration
+    name: SBArtifactS3Bucket
+    required: true
+    title: AWS Service Broker S3 Bucket
+    type: string
+  - default: ''
+    description: Name of the S3 key prefix containing the AWS Service Broker Assets,
+      leave empty if assets are in the root of the bucket
+    display_group: AWS Service Broker Configuration
+    name: SBArtifactS3KeyPrefix
+    required: false
+    title: AWS Service Broker S3 Key Prefix
+    type: string
+  - name: ContentBasedDeduplication
+    required: true
+    description: specifies whether to enable content-based deduplication, only applies
+      to FIFO queues
+    type: enum
+    enum:
+    - 'true'
+    - 'false'
+    default: 'true'
+    title: Content Based Deduplication
+    display_group: SQS Configuration
+  - name: DelaySeconds
+    required: true
+    description: The Id of the AMI you wish to launch the instance from.
+    type: int
+    default: 5
+    title: Delay Seconds
+    display_group: SQS Configuration
+  - name: MaximumMessageSize
+    required: true
+    type: int
+    description: The limit of how many bytes that a message can contain before Amazon
+      SQS rejects it, 1024 bytes (1 KiB) to 262144 bytes (256 KiB)
+    default: 262144
+    title: Maximum Message Size
+    display_group: SQS Configuration
+  - name: MessageRetentionPeriod
+    required: true
+    description: The number of seconds that Amazon SQS retains a message. You can
+      specify an integer value from 60 seconds (1 minute) to 1209600 seconds (14 days).
+    type: int
+    default: 345600
+    title: Message Retention Period
+    display_group: SQS Configuration
+  - name: ReceiveMessageWaitTimeSeconds
+    required: true
+    description: Specifies the duration, in seconds, that the ReceiveMessage action
+      call waits until a message is in the queue in order to include it in the response,
+      as opposed to returning an empty response if a message is not yet available.
+      1 to 20
+    type: int
+    default: 0
+    title: Receive Message Wait Time Seconds
+    display_group: SQS Configuration
+  - name: UsedeadletterQueue
+    required: true
+    description: A dead-letter queue is a queue that other (source) queues can target
+      for messages that can't be processed (consumed) successfully. You can set aside
+      and isolate these messages in the dead-letter queue to determine why their processing
+      doesn't succeed.
+    type: enum
+    enum:
+    - 'true'
+    - 'false'
+    default: 'false'
+    title: Use Dead Letter Queue
+    display_group: SQS Configuration
+  - name: VisibilityTimeout
+    required: true
+    description: This should be longer than the time it would take to process and
+      delete a message, this should not exceed 12 hours.
+    type: int
+    default: 5
+    title: Visibility Timeout
+    display_group: SQS Configuration

@@ -1,0 +1,104 @@
+version: 1.0
+name: kms
+metadata:
+  displayName: Amazon KMS
+  longDescription: AWS Key Management Service (KMS) is a managed service that makes
+    it easy for you to create and control the encryption keys used to encrypt your
+    data, and uses FIPS 140-2 validated hardware security modules to protect the security
+    of your keys.
+  imageUrl: https://s3.amazonaws.com/thp-aws-icons-dev/SecurityIdentityCompliance_AWSKMS_LARGE.png
+  documentationUrl: https://aws.amazon.com/documentation/kms/
+  providerDisplayName: Amazon Web Services
+async: optional
+bindable: true
+description: AWS Service Broker - KMS Key
+tags:
+- AWS
+plans:
+- name: default
+  metadata:
+    cost: https://aws.amazon.com/kms/pricing/
+    displayName: Standard
+    longDescription: Generates a KMS key
+  description: KMS Key
+  free: false
+  parameters:
+  - description: AWS Access Key to authenticate to AWS with.
+    display_group: AWS Account Information
+    name: aws_access_key
+    required: true
+    title: AWS Access Key
+    type: string
+  - description: AWS Secret Key to authenticate to AWS with.
+    display_group: AWS Account Information
+    display_type: password
+    name: aws_secret_key
+    required: true
+    title: AWS Secret Key
+    type: string
+  - description: IAM role ARN for use as Cloudformation Stack Role.
+    display_group: AWS Account Information
+    name: aws_cloudformation_role_arn
+    required: true
+    title: AWS Cloudformation role ARN
+    type: string
+  - default: us-west-2
+    description: AWS Region to create RDS instance in.
+    display_group: AWS Account Information
+    enum:
+    - ap-northeast-1
+    - ap-northeast-2
+    - ap-south-1
+    - ap-southeast-1
+    - ap-southeast-2
+    - ca-central-1
+    - eu-central-1
+    - eu-west-1
+    - eu-west-2
+    - sa-east-1
+    - us-east-1
+    - us-east-2
+    - us-west-1
+    - us-west-2
+    name: region
+    title: AWS Region
+    type: enum
+  - default: awsservicebroker
+    description: Name of the S3 bucket containing the AWS Service Broker Assets
+    display_group: AWS Service Broker Configuration
+    name: SBArtifactS3Bucket
+    required: true
+    title: AWS Service Broker S3 Bucket
+    type: string
+  - default: ''
+    description: Name of the S3 key prefix containing the AWS Service Broker Assets,
+      leave empty if assets are in the root of the bucket
+    display_group: AWS Service Broker Configuration
+    name: SBArtifactS3KeyPrefix
+    required: false
+    title: AWS Service Broker S3 Key Prefix
+    type: string
+  - name: EnableKeyRotation
+    required: true
+    description: AWS KMS generates new cryptographic material for the CMK every year.
+      AWS KMS also saves the CMK's older cryptographic material so it can be used
+      to decrypt data that it encrypted.
+    type: enum
+    default: 'true'
+    enum:
+    - 'true'
+    - 'false'
+    title: Enable Key Rotation
+    display_group: KMS Configuration
+  - name: KeyAdministratorRoleArn
+    required: false
+    description: To add an additional administrative role, specify the ARN here. By
+      default the root user and the CloudFormation Stack role is granted administrative
+      access to the key. Admins can update, revoke, delete the key, but cannot use
+      it to encrypt or decrypt.
+    type: string
+  - name: CloudformationRoleArn
+    required: false
+    description: Role used to launch this stack, this is typically configured as an
+      AWS Service Broker Secret.
+    type: string

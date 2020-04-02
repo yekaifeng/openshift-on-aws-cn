@@ -1,0 +1,89 @@
+version: 1.0
+name: polly
+metadata:
+  displayName: Amazon Polly
+  longDescription: Amazon Polly is a Text-to-Speech (TTS) cloud service that converts
+    text into lifelike speech. You can use Amazon Polly to develop applications that
+    increase engagement and accessibility. Amazon Polly supports multiple languages
+    and includes a variety of lifelike voices, so you can build speech-enabled applications
+    that work in multiple locations and use the ideal voice for your customers.
+  imageUrl: https://s3.amazonaws.com/awsservicebroker/icons/AmazonPolly_LARGE.png
+  documentationUrl: https://aws.amazon.com/documentation/polly/
+  providerDisplayName: Amazon Web Services
+async: optional
+bindable: true
+description: AWS Service Broker - Amazon Polly
+tags:
+- AWS
+plans:
+- name: default
+  metadata:
+    cost: https://aws.amazon.com/polly/pricing/
+    displayName: Standard
+    longDescription: Enables use of AWS Polly Speech Synthesis
+  description: AWS Polly
+  free: false
+  parameters:
+  - description: AWS Access Key to authenticate to AWS with.
+    display_group: AWS Account Information
+    name: aws_access_key
+    required: true
+    title: AWS Access Key
+    type: string
+  - description: AWS Secret Key to authenticate to AWS with.
+    display_group: AWS Account Information
+    display_type: password
+    name: aws_secret_key
+    required: true
+    title: AWS Secret Key
+    type: string
+  - description: IAM role ARN for use as Cloudformation Stack Role.
+    display_group: AWS Account Information
+    name: aws_cloudformation_role_arn
+    required: true
+    title: AWS Cloudformation role ARN
+    type: string
+  - default: us-west-2
+    description: AWS Region to create RDS instance in.
+    display_group: AWS Account Information
+    enum:
+    - ap-northeast-1
+    - ap-northeast-2
+    - ap-south-1
+    - ap-southeast-1
+    - ap-southeast-2
+    - ca-central-1
+    - eu-central-1
+    - eu-west-1
+    - eu-west-2
+    - sa-east-1
+    - us-east-1
+    - us-east-2
+    - us-west-1
+    - us-west-2
+    name: region
+    title: AWS Region
+    type: enum
+  - default: awsservicebroker
+    description: Name of the S3 bucket containing the AWS Service Broker Assets
+    display_group: AWS Service Broker Configuration
+    name: SBArtifactS3Bucket
+    required: true
+    title: AWS Service Broker S3 Bucket
+    type: string
+  - default: ''
+    description: Name of the S3 key prefix containing the AWS Service Broker Assets,
+      leave empty if assets are in the root of the bucket
+    display_group: AWS Service Broker Configuration
+    name: SBArtifactS3KeyPrefix
+    required: false
+    title: AWS Service Broker S3 Key Prefix
+    type: string
+  - name: LexiconPrefix
+    required: false
+    description: Restrict the use of Polly lexicons to those with the specified prefix.
+      If left blank all lexicons can be managed. The restriction applies to the SynthesizeSpeech,
+      GetLexicon, PutLexicon and DeleteLexicon API's
+    type: string
+    title: Lexicon Prefix
+    display_group: Polly Configuration

@@ -1,0 +1,1134 @@
+version: 1.0
+name: rdspostgresql
+metadata:
+  displayName: Amazon RDS for PostgreSQL
+  longDescription: PostgreSQL has become the preferred open source relational database
+    for many enterprise developers and start-ups, powering leading geospatial and
+    mobile applications. Amazon RDS makes it easy to set up, operate, and scale PostgreSQL
+    deployments in the cloud. With Amazon RDS, you can deploy scalable PostgreSQL
+    deployments in minutes with cost-efficient and resizable hardware capacity. Amazon
+    RDS manages complex and time-consuming administrative tasks such as PostgreSQL
+    software installation and upgrades; storage management; replication for high availability
+    and read throughput; and backups for disaster recovery.
+  imageUrl: https://s3.amazonaws.com/awsservicebroker/icons/AmazonRDS_LARGE.png
+  documentationUrl: https://aws.amazon.com/documentation/rds/
+  providerDisplayName: Amazon Web Services
+async: optional
+bindable: true
+description: AWS Service Broker - Amazon RDS for PostgreSQL
+tags:
+- AWS
+plans:
+- name: production
+  metadata:
+    cost: https://aws.amazon.com/rds/pricing/
+    displayName: Production
+    longDescription: Creates an Amazon RDS for PostgreSQL database optimised for production
+      use
+  description: Configuration designed for production deployments
+  free: false
+  parameters:
+  - description: AWS Access Key to authenticate to AWS with.
+    display_group: AWS Account Information
+    name: aws_access_key
+    required: true
+    title: AWS Access Key
+    type: string
+  - description: AWS Secret Key to authenticate to AWS with.
+    display_group: AWS Account Information
+    display_type: password
+    name: aws_secret_key
+    required: true
+    title: AWS Secret Key
+    type: string
+  - description: IAM role ARN for use as Cloudformation Stack Role.
+    display_group: AWS Account Information
+    name: aws_cloudformation_role_arn
+    required: true
+    title: AWS Cloudformation role ARN
+    type: string
+  - default: us-west-2
+    description: AWS Region to create RDS instance in.
+    display_group: AWS Account Information
+    enum:
+    - ap-northeast-1
+    - ap-northeast-2
+    - ap-south-1
+    - ap-southeast-1
+    - ap-southeast-2
+    - ca-central-1
+    - eu-central-1
+    - eu-west-1
+    - eu-west-2
+    - sa-east-1
+    - us-east-1
+    - us-east-2
+    - us-west-1
+    - us-west-2
+    name: region
+    title: AWS Region
+    type: enum
+  - default: awsservicebroker
+    description: Name of the S3 bucket containing the AWS Service Broker Assets
+    display_group: AWS Service Broker Configuration
+    name: SBArtifactS3Bucket
+    required: true
+    title: AWS Service Broker S3 Bucket
+    type: string
+  - default: ''
+    description: Name of the S3 key prefix containing the AWS Service Broker Assets,
+      leave empty if assets are in the root of the bucket
+    display_group: AWS Service Broker Configuration
+    name: SBArtifactS3KeyPrefix
+    required: false
+    title: AWS Service Broker S3 Key Prefix
+    type: string
+  - name: AccessCidr
+    required: true
+    description: CIDR block to allow to connect to database
+    type: string
+    title: Access CIDR
+    display_group: Network and Security
+  - name: AllocatedStorageAndIops
+    required: true
+    description: Storage/IOPS to allocate
+    type: enum
+    default: 100 GB / 1,000 IOPS
+    enum:
+    - 100 GB / 1,000 IOPS
+    - 300 GB / 3,000 IOPS
+    - 600 GB / 6,000 IOPS
+    - 1,000 GB / 10,000 IOPS
+    - 1,500 GB / 15,000 IOPS
+    - 2,000 GB / 20,000 IOPS
+    - 3,000 GB / 30,000 IOPS
+    - 4,000 GB / 40,000 IOPS
+    - 6,000 GB / 60,000 IOPS
+    title: Allocated Storage And IOPS
+    display_group: Database Instance Specifications
+  - name: DBInstanceClass
+    required: true
+    description: The compute and memory capacity of the DB instance.
+    type: enum
+    default: db.m4.xlarge
+    enum:
+    - db.m1.small
+    - db.m1.medium
+    - db.m1.large
+    - db.m1.xlarge
+    - db.m2.xlarge
+    - db.m2.2xlarge
+    - db.m2.4xlarge
+    - db.m3.medium
+    - db.m3.large
+    - db.m3.xlarge
+    - db.m3.2xlarge
+    - db.m4.large
+    - db.m4.xlarge
+    - db.m4.2xlarge
+    - db.m4.4xlarge
+    - db.m4.10xlarge
+    - db.r3.large
+    - db.r3.xlarge
+    - db.r3.2xlarge
+    - db.r3.4xlarge
+    - db.r3.8xlarge
+    - db.t2.micro
+    - db.t2.small
+    - db.t2.medium
+    - db.t2.large
+    title: DB Instance Class
+    display_group: Database Instance Specifications
+  - name: EngineVersion
+    required: true
+    description: The version number of the database engine to use.
+    type: enum
+    default: 9.6.3
+    enum:
+    - 9.3.12
+    - 9.3.14
+    - 9.3.16
+    - 9.3.17
+    - 9.4.7
+    - 9.4.9
+    - 9.4.11
+    - 9.4.12
+    - 9.5.2
+    - 9.5.4
+    - 9.5.6
+    - 9.5.7
+    - 9.6.1
+    - 9.6.2
+    - 9.6.3
+    title: Engine Version
+    display_group: Database Options
+  - name: PostgresServerTimezone
+    required: true
+    description: The default timezone for the database engine to use.
+    type: enum
+    default: UTC
+    enum:
+    - Africa/Cairo
+    - Africa/Casablanca
+    - Africa/Harare
+    - Africa/Monrovia
+    - Africa/Nairobi
+    - Africa/Tripoli
+    - Africa/Windhoek
+    - America/Araguaina
+    - America/Asuncion
+    - America/Bogota
+    - America/Caracas
+    - America/Chihuahua
+    - America/Cuiaba
+    - America/Denver
+    - America/Fortaleza
+    - America/Guatemala
+    - America/Halifax
+    - America/Manaus
+    - America/Matamoros
+    - America/Monterrey
+    - America/Montevideo
+    - America/Phoenix
+    - America/Santiago
+    - America/Tijuana
+    - Asia/Amman
+    - Asia/Ashgabat
+    - Asia/Baghdad
+    - Asia/Baku
+    - Asia/Bangkok
+    - Asia/Beirut
+    - Asia/Calcutta
+    - Asia/Damascus
+    - Asia/Dhaka
+    - Asia/Irkutsk
+    - Asia/Jerusalem
+    - Asia/Kabul
+    - Asia/Karachi
+    - Asia/Kathmandu
+    - Asia/Krasnoyarsk
+    - Asia/Magadan
+    - Asia/Muscat
+    - Asia/Novosibirsk
+    - Asia/Riyadh
+    - Asia/Seoul
+    - Asia/Shanghai
+    - Asia/Singapore
+    - Asia/Taipei
+    - Asia/Tehran
+    - Asia/Tokyo
+    - Asia/Ulaanbaatar
+    - Asia/Vladivostok
+    - Asia/Yakutsk
+    - Asia/Yerevan
+    - Atlantic/Azores
+    - Australia/Adelaide
+    - Australia/Brisbane
+    - Australia/Darwin
+    - Australia/Hobart
+    - Australia/Perth
+    - Australia/Sydney
+    - Canada/Newfoundland
+    - Canada/Saskatchewan
+    - Brazil/East
+    - Europe/Amsterdam
+    - Europe/Athens
+    - Europe/Dublin
+    - Europe/Helsinki
+    - Europe/Istanbul
+    - Europe/Kaliningrad
+    - Europe/Moscow
+    - Europe/Paris
+    - Europe/Prague
+    - Europe/Sarajevo
+    - Pacific/Auckland
+    - Pacific/Fiji
+    - Pacific/Guam
+    - Pacific/Honolulu
+    - Pacific/Samoa
+    - US/Alaska
+    - US/Central
+    - US/Eastern
+    - US/East-Indiana
+    - US/Pacific
+    - UTC
+    title: PostgreSQL Server Timezone
+    display_group: Database Options
+  - name: PreferredBackupWindow
+    required: true
+    description: The daily time range in UTC during which automated backups are created
+      (if automated backups are enabled). Cannot overlap with PreferredMaintenanceWindowTime
+    type: enum
+    default: 00:00-02:00
+    enum:
+    - 00:00-02:00
+    - 01:00-03:00
+    - 02:00-04:00
+    - 03:00-05:00
+    - 04:00-06:00
+    - 05:00-07:00
+    - 06:00-08:00
+    - 07:00-09:00
+    - 08:00-10:00
+    - 09:00-11:00
+    - 10:00-12:00
+    - 11:00-13:00
+    - 12:00-14:00
+    - 13:00-15:00
+    - 14:00-16:00
+    - 15:00-17:00
+    - 16:00-18:00
+    - 17:00-19:00
+    - 18:00-20:00
+    - 19:00-21:00
+    - 20:00-22:00
+    - 21:00-23:00
+    - 22:00-24:00
+    title: Preferred Backup Window
+    display_group: Backup
+  - name: PreferredMaintenanceWindowDay
+    required: true
+    description: The day of the week which RDS maintenance will be performed
+    type: enum
+    default: Mon
+    enum:
+    - Mon
+    - Tue
+    - Wed
+    - Thu
+    - Fri
+    - Sat
+    - Sun
+    title: Preferred Maintenance Window Day
+    display_group: Maintenance
+  - name: PreferredMaintenanceWindowEndTime
+    required: true
+    description: The weekly end time in UTC for the RDS maintenance window, must be
+      more than PreferredMaintenanceWindowEndTime and cannot overlap with PreferredBackupWindow
+    type: enum
+    default: 06:00
+    enum:
+    - 00:00
+    - 01:00
+    - 02:00
+    - 03:00
+    - 04:00
+    - 05:00
+    - 06:00
+    - 07:00
+    - 08:00
+    - 09:00
+    - '10:00'
+    - '11:00'
+    - '12:00'
+    - '13:00'
+    - '14:00'
+    - '15:00'
+    - '16:00'
+    - '17:00'
+    - '18:00'
+    - '19:00'
+    - '20:00'
+    - '21:00'
+    - '22:00'
+    title: Preferred Maintenance Window End Time
+    display_group: Maintenance
+  - name: PreferredMaintenanceWindowStartTime
+    required: true
+    description: The weekly start time in UTC for the RDS maintenance window, must
+      be less than PreferredMaintenanceWindowEndTime and cannot overlap with PreferredBackupWindow
+    type: enum
+    default: 04:00
+    enum:
+    - 00:00
+    - 01:00
+    - 02:00
+    - 03:00
+    - 04:00
+    - 05:00
+    - 06:00
+    - 07:00
+    - 08:00
+    - 09:00
+    - '10:00'
+    - '11:00'
+    - '12:00'
+    - '13:00'
+    - '14:00'
+    - '15:00'
+    - '16:00'
+    - '17:00'
+    - '18:00'
+    - '19:00'
+    - '20:00'
+    - '21:00'
+    - '22:00'
+    title: Preferred MaintenanceWindow Start Time
+    display_group: Maintenance
+  - name: PubliclyAccessible
+    required: true
+    description: Indicates whether the DB instance is an Internet-facing instance.
+    type: enum
+    default: 'false'
+    enum:
+    - 'true'
+    - 'false'
+    title: Publicly Accessible
+    display_group: Network and Security
+  - name: VpcId
+    required: true
+    description: The ID of the VPC to launch the RDS instance into
+    type: string
+    title: VPC Id
+    display_group: Network and Security
+- name: dev
+  metadata:
+    cost: https://aws.amazon.com/rds/pricing/
+    displayName: Development
+    longDescription: Creates an Amazon RDS for PostgreSQL database optimised for dev/test
+      use
+  description: Configuration designed for development and testing deployments
+  free: false
+  parameters:
+  - description: AWS Access Key to authenticate to AWS with.
+    display_group: AWS Account Information
+    name: aws_access_key
+    required: true
+    title: AWS Access Key
+    type: string
+  - description: AWS Secret Key to authenticate to AWS with.
+    display_group: AWS Account Information
+    display_type: password
+    name: aws_secret_key
+    required: true
+    title: AWS Secret Key
+    type: string
+  - description: IAM role ARN for use as Cloudformation Stack Role.
+    display_group: AWS Account Information
+    name: aws_cloudformation_role_arn
+    required: true
+    title: AWS Cloudformation role ARN
+    type: string
+  - default: us-west-2
+    description: AWS Region to create RDS instance in.
+    display_group: AWS Account Information
+    enum:
+    - ap-northeast-1
+    - ap-northeast-2
+    - ap-south-1
+    - ap-southeast-1
+    - ap-southeast-2
+    - ca-central-1
+    - eu-central-1
+    - eu-west-1
+    - eu-west-2
+    - sa-east-1
+    - us-east-1
+    - us-east-2
+    - us-west-1
+    - us-west-2
+    name: region
+    title: AWS Region
+    type: enum
+  - default: awsservicebroker
+    description: Name of the S3 bucket containing the AWS Service Broker Assets
+    display_group: AWS Service Broker Configuration
+    name: SBArtifactS3Bucket
+    required: true
+    title: AWS Service Broker S3 Bucket
+    type: string
+  - default: ''
+    description: Name of the S3 key prefix containing the AWS Service Broker Assets,
+      leave empty if assets are in the root of the bucket
+    display_group: AWS Service Broker Configuration
+    name: SBArtifactS3KeyPrefix
+    required: false
+    title: AWS Service Broker S3 Key Prefix
+    type: string
+  - name: AccessCidr
+    required: true
+    description: CIDR block to allow to connect to database
+    type: string
+    title: Access CIDR
+    display_group: Network and Security
+  - name: AllocatedStorageAndIops
+    required: true
+    description: Storage/IOPS to allocate
+    type: enum
+    default: 100 GB / 1,000 IOPS
+    enum:
+    - 100 GB / 1,000 IOPS
+    - 300 GB / 3,000 IOPS
+    - 600 GB / 6,000 IOPS
+    - 1,000 GB / 10,000 IOPS
+    - 1,500 GB / 15,000 IOPS
+    - 2,000 GB / 20,000 IOPS
+    - 3,000 GB / 30,000 IOPS
+    - 4,000 GB / 40,000 IOPS
+    - 6,000 GB / 60,000 IOPS
+    title: Allocated Storage And IOPS
+    display_group: Database Instance Specifications
+  - name: DBInstanceClass
+    required: true
+    description: The compute and memory capacity of the DB instance.
+    type: enum
+    default: db.m4.xlarge
+    enum:
+    - db.m1.small
+    - db.m1.medium
+    - db.m1.large
+    - db.m1.xlarge
+    - db.m2.xlarge
+    - db.m2.2xlarge
+    - db.m2.4xlarge
+    - db.m3.medium
+    - db.m3.large
+    - db.m3.xlarge
+    - db.m3.2xlarge
+    - db.m4.large
+    - db.m4.xlarge
+    - db.m4.2xlarge
+    - db.m4.4xlarge
+    - db.m4.10xlarge
+    - db.r3.large
+    - db.r3.xlarge
+    - db.r3.2xlarge
+    - db.r3.4xlarge
+    - db.r3.8xlarge
+    - db.t2.micro
+    - db.t2.small
+    - db.t2.medium
+    - db.t2.large
+    title: DB Instance Class
+    display_group: Database Instance Specifications
+  - name: EngineVersion
+    required: true
+    description: The version number of the database engine to use.
+    type: enum
+    default: 9.6.3
+    enum:
+    - 9.3.12
+    - 9.3.14
+    - 9.3.16
+    - 9.3.17
+    - 9.4.7
+    - 9.4.9
+    - 9.4.11
+    - 9.4.12
+    - 9.5.2
+    - 9.5.4
+    - 9.5.6
+    - 9.5.7
+    - 9.6.1
+    - 9.6.2
+    - 9.6.3
+    title: Engine Version
+    display_group: Database Options
+  - name: PostgresServerTimezone
+    required: true
+    description: The default timezone for the database engine to use.
+    type: enum
+    default: UTC
+    enum:
+    - Africa/Cairo
+    - Africa/Casablanca
+    - Africa/Harare
+    - Africa/Monrovia
+    - Africa/Nairobi
+    - Africa/Tripoli
+    - Africa/Windhoek
+    - America/Araguaina
+    - America/Asuncion
+    - America/Bogota
+    - America/Caracas
+    - America/Chihuahua
+    - America/Cuiaba
+    - America/Denver
+    - America/Fortaleza
+    - America/Guatemala
+    - America/Halifax
+    - America/Manaus
+    - America/Matamoros
+    - America/Monterrey
+    - America/Montevideo
+    - America/Phoenix
+    - America/Santiago
+    - America/Tijuana
+    - Asia/Amman
+    - Asia/Ashgabat
+    - Asia/Baghdad
+    - Asia/Baku
+    - Asia/Bangkok
+    - Asia/Beirut
+    - Asia/Calcutta
+    - Asia/Damascus
+    - Asia/Dhaka
+    - Asia/Irkutsk
+    - Asia/Jerusalem
+    - Asia/Kabul
+    - Asia/Karachi
+    - Asia/Kathmandu
+    - Asia/Krasnoyarsk
+    - Asia/Magadan
+    - Asia/Muscat
+    - Asia/Novosibirsk
+    - Asia/Riyadh
+    - Asia/Seoul
+    - Asia/Shanghai
+    - Asia/Singapore
+    - Asia/Taipei
+    - Asia/Tehran
+    - Asia/Tokyo
+    - Asia/Ulaanbaatar
+    - Asia/Vladivostok
+    - Asia/Yakutsk
+    - Asia/Yerevan
+    - Atlantic/Azores
+    - Australia/Adelaide
+    - Australia/Brisbane
+    - Australia/Darwin
+    - Australia/Hobart
+    - Australia/Perth
+    - Australia/Sydney
+    - Canada/Newfoundland
+    - Canada/Saskatchewan
+    - Brazil/East
+    - Europe/Amsterdam
+    - Europe/Athens
+    - Europe/Dublin
+    - Europe/Helsinki
+    - Europe/Istanbul
+    - Europe/Kaliningrad
+    - Europe/Moscow
+    - Europe/Paris
+    - Europe/Prague
+    - Europe/Sarajevo
+    - Pacific/Auckland
+    - Pacific/Fiji
+    - Pacific/Guam
+    - Pacific/Honolulu
+    - Pacific/Samoa
+    - US/Alaska
+    - US/Central
+    - US/Eastern
+    - US/East-Indiana
+    - US/Pacific
+    - UTC
+    title: PostgreSQL Server Timezone
+    display_group: Database Options
+  - name: PubliclyAccessible
+    required: true
+    description: Indicates whether the DB instance is an Internet-facing instance.
+    type: enum
+    default: 'false'
+    enum:
+    - 'true'
+    - 'false'
+    title: Publicly Accessible
+    display_group: Network and Security
+  - name: VpcId
+    required: true
+    description: The ID of the VPC to launch the RDS instance into
+    type: string
+    title: VPC Id
+    display_group: Network and Security
+- name: custom
+  metadata:
+    cost: https://aws.amazon.com/rds/pricing/
+    displayName: Custom
+    longDescription: Creates an Amazon RDS for PostgreSQL database with custom configuration
+  description: Custom Configuration for Advanced deployments
+  free: false
+  parameters:
+  - description: AWS Access Key to authenticate to AWS with.
+    display_group: AWS Account Information
+    name: aws_access_key
+    required: true
+    title: AWS Access Key
+    type: string
+  - description: AWS Secret Key to authenticate to AWS with.
+    display_group: AWS Account Information
+    display_type: password
+    name: aws_secret_key
+    required: true
+    title: AWS Secret Key
+    type: string
+  - description: IAM role ARN for use as Cloudformation Stack Role.
+    display_group: AWS Account Information
+    name: aws_cloudformation_role_arn
+    required: true
+    title: AWS Cloudformation role ARN
+    type: string
+  - default: us-west-2
+    description: AWS Region to create RDS instance in.
+    display_group: AWS Account Information
+    enum:
+    - ap-northeast-1
+    - ap-northeast-2
+    - ap-south-1
+    - ap-southeast-1
+    - ap-southeast-2
+    - ca-central-1
+    - eu-central-1
+    - eu-west-1
+    - eu-west-2
+    - sa-east-1
+    - us-east-1
+    - us-east-2
+    - us-west-1
+    - us-west-2
+    name: region
+    title: AWS Region
+    type: enum
+  - default: awsservicebroker
+    description: Name of the S3 bucket containing the AWS Service Broker Assets
+    display_group: AWS Service Broker Configuration
+    name: SBArtifactS3Bucket
+    required: true
+    title: AWS Service Broker S3 Bucket
+    type: string
+  - default: ''
+    description: Name of the S3 key prefix containing the AWS Service Broker Assets,
+      leave empty if assets are in the root of the bucket
+    display_group: AWS Service Broker Configuration
+    name: SBArtifactS3KeyPrefix
+    required: false
+    title: AWS Service Broker S3 Key Prefix
+    type: string
+  - name: AccessCidr
+    required: true
+    description: CIDR block to allow to connect to database
+    type: string
+    title: Access CIDR
+    display_group: Network and Security
+  - name: AllocatedStorageAndIops
+    required: true
+    description: Storage/IOPS to allocate
+    type: enum
+    default: 100 GB / 1,000 IOPS
+    enum:
+    - 100 GB / 1,000 IOPS
+    - 300 GB / 3,000 IOPS
+    - 600 GB / 6,000 IOPS
+    - 1,000 GB / 10,000 IOPS
+    - 1,500 GB / 15,000 IOPS
+    - 2,000 GB / 20,000 IOPS
+    - 3,000 GB / 30,000 IOPS
+    - 4,000 GB / 40,000 IOPS
+    - 6,000 GB / 60,000 IOPS
+    title: Allocated Storage And IOPS
+    display_group: Database Instance Specifications
+  - name: AllowMajorVersionUpgrade
+    required: true
+    description: If you update the EngineVersion property to a version that's different
+      from the DB instance's current major version, set this property to true.
+    type: enum
+    default: 'false'
+    enum:
+    - 'true'
+    - 'false'
+  - name: AutoMinorVersionUpgrade
+    required: true
+    description: Indicates that minor engine upgrades are applied automatically to
+      the DB instance during the maintenance window.
+    type: enum
+    default: 'true'
+    enum:
+    - 'true'
+    - 'false'
+  - name: AvailabilityZones
+    required: true
+    description: list of availability zones to use, must be the same quantity as specified
+      in NumberOfAvailabilityZones
+    type: string
+    default: Auto
+    title: Availability Zones
+    display_group: Network and Security
+  - name: BackupRetentionPeriod
+    required: true
+    description: The number of days during which automatic DB snapshots are retained.
+      Setting 0 disables automatic snapshots, maximum value is 35
+    type: int
+    default: 35
+  - name: CidrBlocks
+    required: true
+    description: comma seperated list of CIDR blocks to place RDS into, must be the
+      same quantity as specified in NumberOfAvailabilityZones
+    type: string
+    default: Auto
+    title: CIDR Blocks
+    display_group: Network and Security
+  - name: CidrSize
+    required: true
+    description: Size of Cidr block to allocate if CidrBlocks is set to Auto.
+    type: string
+    default: 27
+    title: CIDR Size
+    display_group: Network and Security
+  - name: CopyTagsToSnapshot
+    required: true
+    description: Indicates whether to copy all of the user-defined tags from the DB
+      instance to snapshots of the DB instance.
+    type: enum
+    default: 'true'
+    enum:
+    - 'true'
+    - 'false'
+  - name: DBInstanceClass
+    required: true
+    description: The compute and memory capacity of the DB instance.
+    type: enum
+    default: db.m4.xlarge
+    enum:
+    - db.m1.small
+    - db.m1.medium
+    - db.m1.large
+    - db.m1.xlarge
+    - db.m2.xlarge
+    - db.m2.2xlarge
+    - db.m2.4xlarge
+    - db.m3.medium
+    - db.m3.large
+    - db.m3.xlarge
+    - db.m3.2xlarge
+    - db.m4.large
+    - db.m4.xlarge
+    - db.m4.2xlarge
+    - db.m4.4xlarge
+    - db.m4.10xlarge
+    - db.r3.large
+    - db.r3.xlarge
+    - db.r3.2xlarge
+    - db.r3.4xlarge
+    - db.r3.8xlarge
+    - db.t2.micro
+    - db.t2.small
+    - db.t2.medium
+    - db.t2.large
+    title: DB Instance Class
+    display_group: Database Instance Specifications
+  - name: DBName
+    required: true
+    description: The name of the database to create when the DB instance is created,
+      will be autogenerated if set to "Auto".
+    type: string
+    default: Auto
+  - name: EngineVersion
+    required: true
+    description: The version number of the database engine to use.
+    type: enum
+    default: 9.6.3
+    enum:
+    - 9.3.12
+    - 9.3.14
+    - 9.3.16
+    - 9.3.17
+    - 9.4.7
+    - 9.4.9
+    - 9.4.11
+    - 9.4.12
+    - 9.5.2
+    - 9.5.4
+    - 9.5.6
+    - 9.5.7
+    - 9.6.1
+    - 9.6.2
+    - 9.6.3
+    title: Engine Version
+    display_group: Database Options
+  - name: MasterUserPassword
+    required: true
+    description: Master user database Password, if left at default a 32 character
+      password will be generated
+    type: string
+    default: Auto
+    title: Master User Password
+    display_group: Database Options
+    display_type: password
+  - name: MasterUsername
+    required: true
+    description: Master database Username
+    type: string
+    title: Master Username
+    display_group: Database Options
+  - name: MonitoringInterval
+    required: true
+    description: The interval, in seconds, between points when Enhanced Monitoring
+      metrics are collected for the DB instance.
+    type: enum
+    default: 1
+    enum:
+    - '0'
+    - '1'
+    - '5'
+    - '10'
+    - '15'
+    - '30'
+    - '60'
+  - name: MultiAZ
+    required: true
+    description: Specifies if the database instance is a multiple Availability Zone
+      deployment.
+    type: enum
+    default: 'true'
+    enum:
+    - 'true'
+    - 'false'
+    title: Multi AZ
+    display_group: Database Options
+  - name: NumberOfAvailabilityZones
+    required: true
+    description: Quantity of subnets to use, if selecting more than 2 the region this
+      stack is in must have at least that many Availability Zones
+    type: enum
+    default: 2
+    enum:
+    - '2'
+    - '3'
+    - '4'
+    - '5'
+    title: Number Of Availability Zones
+    display_group: Network and Security
+  - name: PortNumber
+    required: true
+    description: The port number for the database server to listen on
+    type: int
+    default: 10001
+    title: Port Number
+    display_group: Database Options
+  - name: PostgresServerTimezone
+    required: true
+    description: The default timezone for the database engine to use.
+    type: enum
+    default: UTC
+    enum:
+    - Africa/Cairo
+    - Africa/Casablanca
+    - Africa/Harare
+    - Africa/Monrovia
+    - Africa/Nairobi
+    - Africa/Tripoli
+    - Africa/Windhoek
+    - America/Araguaina
+    - America/Asuncion
+    - America/Bogota
+    - America/Caracas
+    - America/Chihuahua
+    - America/Cuiaba
+    - America/Denver
+    - America/Fortaleza
+    - America/Guatemala
+    - America/Halifax
+    - America/Manaus
+    - America/Matamoros
+    - America/Monterrey
+    - America/Montevideo
+    - America/Phoenix
+    - America/Santiago
+    - America/Tijuana
+    - Asia/Amman
+    - Asia/Ashgabat
+    - Asia/Baghdad
+    - Asia/Baku
+    - Asia/Bangkok
+    - Asia/Beirut
+    - Asia/Calcutta
+    - Asia/Damascus
+    - Asia/Dhaka
+    - Asia/Irkutsk
+    - Asia/Jerusalem
+    - Asia/Kabul
+    - Asia/Karachi
+    - Asia/Kathmandu
+    - Asia/Krasnoyarsk
+    - Asia/Magadan
+    - Asia/Muscat
+    - Asia/Novosibirsk
+    - Asia/Riyadh
+    - Asia/Seoul
+    - Asia/Shanghai
+    - Asia/Singapore
+    - Asia/Taipei
+    - Asia/Tehran
+    - Asia/Tokyo
+    - Asia/Ulaanbaatar
+    - Asia/Vladivostok
+    - Asia/Yakutsk
+    - Asia/Yerevan
+    - Atlantic/Azores
+    - Australia/Adelaide
+    - Australia/Brisbane
+    - Australia/Darwin
+    - Australia/Hobart
+    - Australia/Perth
+    - Australia/Sydney
+    - Canada/Newfoundland
+    - Canada/Saskatchewan
+    - Brazil/East
+    - Europe/Amsterdam
+    - Europe/Athens
+    - Europe/Dublin
+    - Europe/Helsinki
+    - Europe/Istanbul
+    - Europe/Kaliningrad
+    - Europe/Moscow
+    - Europe/Paris
+    - Europe/Prague
+    - Europe/Sarajevo
+    - Pacific/Auckland
+    - Pacific/Fiji
+    - Pacific/Guam
+    - Pacific/Honolulu
+    - Pacific/Samoa
+    - US/Alaska
+    - US/Central
+    - US/Eastern
+    - US/East-Indiana
+    - US/Pacific
+    - UTC
+    title: PostgreSQL Server Timezone
+    display_group: Database Options
+  - name: PreferredBackupWindow
+    required: true
+    description: The daily time range in UTC during which automated backups are created
+      (if automated backups are enabled). Cannot overlap with PreferredMaintenanceWindowTime
+    type: enum
+    default: 00:00-02:00
+    enum:
+    - 00:00-02:00
+    - 01:00-03:00
+    - 02:00-04:00
+    - 03:00-05:00
+    - 04:00-06:00
+    - 05:00-07:00
+    - 06:00-08:00
+    - 07:00-09:00
+    - 08:00-10:00
+    - 09:00-11:00
+    - 10:00-12:00
+    - 11:00-13:00
+    - 12:00-14:00
+    - 13:00-15:00
+    - 14:00-16:00
+    - 15:00-17:00
+    - 16:00-18:00
+    - 17:00-19:00
+    - 18:00-20:00
+    - 19:00-21:00
+    - 20:00-22:00
+    - 21:00-23:00
+    - 22:00-24:00
+    title: Preferred Backup Window
+    display_group: Backup
+  - name: PreferredMaintenanceWindowDay
+    required: true
+    description: The day of the week which RDS maintenance will be performed
+    type: enum
+    default: Mon
+    enum:
+    - Mon
+    - Tue
+    - Wed
+    - Thu
+    - Fri
+    - Sat
+    - Sun
+    title: Preferred Maintenance Window Day
+    display_group: Maintenance
+  - name: PreferredMaintenanceWindowEndTime
+    required: true
+    description: The weekly end time in UTC for the RDS maintenance window, must be
+      more than PreferredMaintenanceWindowEndTime and cannot overlap with PreferredBackupWindow
+    type: enum
+    default: 06:00
+    enum:
+    - 00:00
+    - 01:00
+    - 02:00
+    - 03:00
+    - 04:00
+    - 05:00
+    - 06:00
+    - 07:00
+    - 08:00
+    - 09:00
+    - '10:00'
+    - '11:00'
+    - '12:00'
+    - '13:00'
+    - '14:00'
+    - '15:00'
+    - '16:00'
+    - '17:00'
+    - '18:00'
+    - '19:00'
+    - '20:00'
+    - '21:00'
+    - '22:00'
+    title: Preferred Maintenance Window End Time
+    display_group: Maintenance
+  - name: PreferredMaintenanceWindowStartTime
+    required: true
+    description: The weekly start time in UTC for the RDS maintenance window, must
+      be less than PreferredMaintenanceWindowEndTime and cannot overlap with PreferredBackupWindow
+    type: enum
+    default: 04:00
+    enum:
+    - 00:00
+    - 01:00
+    - 02:00
+    - 03:00
+    - 04:00
+    - 05:00
+    - 06:00
+    - 07:00
+    - 08:00
+    - 09:00
+    - '10:00'
+    - '11:00'
+    - '12:00'
+    - '13:00'
+    - '14:00'
+    - '15:00'
+    - '16:00'
+    - '17:00'
+    - '18:00'
+    - '19:00'
+    - '20:00'
+    - '21:00'
+    - '22:00'
+    title: Preferred MaintenanceWindow Start Time
+    display_group: Maintenance
+  - name: PubliclyAccessible
+    required: true
+    description: Indicates whether the DB instance is an Internet-facing instance.
+    type: enum
+    default: 'false'
+    enum:
+    - 'true'
+    - 'false'
+    title: Publicly Accessible
+    display_group: Network and Security
+  - name: StorageEncrypted
+    required: true
+    description: Indicates whether the DB instance is encrypted.
+    type: enum
+    default: 'true'
+    enum:
+    - 'true'
+    - 'false'
+  - name: StorageType
+    required: true
+    description: Specifies the storage type to be associated with the DB instance.
+    type: enum
+    default: io1
+    enum:
+    - io1
+    - gp2
+    - standard
+  - name: VpcId
+    required: true
+    description: The ID of the VPC to launch the RDS instance into
+    type: string
+    title: VPC Id
+    display_group: Network and Security

@@ -1,0 +1,30 @@
+[
+    {
+      "ParameterKey": "ClusterName", 
+      "ParameterValue": "greepaas"
+    },
+    {
+      "ParameterKey": "InfrastructureName", 
+      "ParameterValue": "greepaas-p22mk"
+    },
+    {
+      "ParameterKey": "HostedZoneId", 
+      "ParameterValue": "Z084846825UVTTL9AENOB"
+    },
+    {
+      "ParameterKey": "HostedZoneName", 
+      "ParameterValue": "openshift.net.cn"
+    },
+    {
+      "ParameterKey": "PublicSubnets", 
+      "ParameterValue": "subnet-00e0f75140e896e55,subnet-00fdd14eace4ff1c8,subnet-084741d9922927d2f"
+    },
+    {
+      "ParameterKey": "PrivateSubnets", 
+      "ParameterValue": "subnet-0fb444db4d886d009,subnet-0b93e91f943544f44,subnet-0d51f00147f62f9fd"
+    },
+    {
+      "ParameterKey": "VpcId", 
+      "ParameterValue": "vpc-0338447deb4628091"
+    }
+  ]
