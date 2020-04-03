@@ -471,7 +471,6 @@ oc create secret generic aws-cloud-credentials --from-literal=aws_access_key_id=
 
 ```
 
-
 ## 13. 配置imageregistry 内置镜像仓库
 
 默认安装可能从cloud-credential-operator拿不到AK, SK, 需要手动配置
@@ -489,6 +488,15 @@ oc edit configs.imageregistry.operator.openshift.io/cluster
       keyID: ""
       region: cn-northwest-1
       regionEndpoint: ""
+
+```
+
+## 14. 为work节点准备并创建machineSet, 使计算节点能够获得自动缩扩容能力
+
+```bash
+oc create -f machineset/99_openshift-cluster-api_worker-machineset-0.yaml
+oc create -f machineset/99_openshift-cluster-api_worker-machineset-1.yaml
+oc create -f machineset/99_openshift-cluster-api_worker-machineset-2.yaml
 
 ```
 
