@@ -173,7 +173,7 @@ Resources:
       IamInstanceProfile: !Ref MasterInstanceProfileName
       InstanceType: !Ref MasterInstanceType
       NetworkInterfaces:
-      - AssociatePublicIpAddress: "false"
+      - AssociatePublicIpAddress: "true"
         DeviceIndex: "0"
         GroupSet:
         - !Ref "MasterSecurityGroupId"
@@ -225,7 +225,7 @@ Resources:
       IamInstanceProfile: !Ref MasterInstanceProfileName
       InstanceType: !Ref MasterInstanceType
       NetworkInterfaces:
-      - AssociatePublicIpAddress: "false"
+      - AssociatePublicIpAddress: "true"
         DeviceIndex: "0"
         GroupSet:
         - !Ref "MasterSecurityGroupId"
@@ -277,7 +277,7 @@ Resources:
       IamInstanceProfile: !Ref MasterInstanceProfileName
       InstanceType: !Ref MasterInstanceType
       NetworkInterfaces:
-      - AssociatePublicIpAddress: "false"
+      - AssociatePublicIpAddress: "true"
         DeviceIndex: "0"
         GroupSet:
         - !Ref "MasterSecurityGroupId"

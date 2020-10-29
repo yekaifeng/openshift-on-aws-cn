@@ -103,7 +103,7 @@ Resources:
       IamInstanceProfile: !Ref WorkerInstanceProfileName
       InstanceType: !Ref WorkerInstanceType
       NetworkInterfaces:
-      - AssociatePublicIpAddress: "false"
+      - AssociatePublicIpAddress: "true"
         DeviceIndex: "0"
         GroupSet:
         - !Ref "WorkerSecurityGroupId"

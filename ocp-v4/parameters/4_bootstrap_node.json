@@ -1,7 +1,7 @@
 [
     {
       "ParameterKey": "InfrastructureName", 
-      "ParameterValue": "greepaas-p22mk"
+      "ParameterValue": "procloud-5z52k"
     },
     {
       "ParameterKey": "RhcosAmi", 
@@ -13,19 +13,19 @@
     },
     {
       "ParameterKey": "PublicSubnet", 
-      "ParameterValue": "subnet-00e0f75140e896e55"
+      "ParameterValue": "subnet-013236d23af8c8cab"
     },
     {
       "ParameterKey": "MasterSecurityGroupId", 
-      "ParameterValue": "sg-08eed6269822571d2"
+      "ParameterValue": "sg-0160660d7b9f17aee"
     },
     {
       "ParameterKey": "VpcId", 
-      "ParameterValue": "vpc-0338447deb4628091"
+      "ParameterValue": "vpc-0f8aaa8cd1275f2d0"
     },
     {
       "ParameterKey": "BootstrapIgnitionLocation", 
-      "ParameterValue": "s3://greepaas-cn-northwest-1/greepaas-p22mk/bootstrap.ign"
+      "ParameterValue": "s3://procloud-cn-northwest-1/procloud-5z52k/bootstrap.ign"
     },
     {
       "ParameterKey": "AutoRegisterELB", 
@@ -33,18 +33,18 @@
     },
     {
       "ParameterKey": "RegisterNlbIpTargetsLambdaArn", 
-      "ParameterValue": "arn:aws-cn:lambda:cn-northwest-1:961163908085:function:greepaas-elb-dns-RegisterNlbIpTargets-X50ZDCAWUK3Q"
+      "ParameterValue": "arn:aws-cn:lambda:cn-northwest-1:961163908085:function:procloud-elb-dns-RegisterNlbIpTargets-1IZA9MCK7RKT3"
     },
     {
       "ParameterKey": "ExternalApiTargetGroupArn", 
-      "ParameterValue": "arn:aws-cn:elasticloadbalancing:cn-northwest-1:961163908085:targetgroup/greep-Exter-17J2NQDC6GO0V/706a5acf951a14f3"
+      "ParameterValue": "arn:aws-cn:elasticloadbalancing:cn-northwest-1:961163908085:targetgroup/procl-Exter-1S4TV0GITGIY2/0b6a532958adf2c2"
     },
     {
       "ParameterKey": "InternalApiTargetGroupArn", 
-      "ParameterValue": "arn:aws-cn:elasticloadbalancing:cn-northwest-1:961163908085:targetgroup/greep-Inter-1MG1HQTNIBQ11/4029e77583e9dd4e"
+      "ParameterValue": "arn:aws-cn:elasticloadbalancing:cn-northwest-1:961163908085:targetgroup/procl-Inter-G8WF9N8A1UZC/26a6d2fc60c68456"
     },
     {
       "ParameterKey": "InternalServiceTargetGroupArn", 
-      "ParameterValue": "arn:aws-cn:elasticloadbalancing:cn-northwest-1:961163908085:targetgroup/greep-Inter-S8KUXKIXHK7L/a78aa7106616bc00"
+      "ParameterValue": "arn:aws-cn:elasticloadbalancing:cn-northwest-1:961163908085:targetgroup/procl-Inter-U44TOUN5UDKY/047e7240d166116d"
     }
   ]

@@ -1,14 +1,14 @@
 {
-  "Comment": "create wildcard record set for *.apps.openshift.net.cn",
+  "Comment": "create wildcard record set for *.apps.procloud.greeyun.com",
   "Changes": [
     {
       "Action": "CREATE",
       "ResourceRecordSet": {
-        "Name": "*.apps.greepaas.openshift.net.cn",
+        "Name": "*.apps.procloud.greeyun.com",
         "Type": "A",
         "AliasTarget": {
-          "HostedZoneId": "ZM7IZAIOVVDZF",
-          "DNSName": "abbc09df13b2148b1a20ebc3c4497a82-847185455.cn-northwest-1.elb.amazonaws.com.cn",
+          "HostedZoneId": "Z09819653O0UB2HYA1CTA",
+          "DNSName": "a941d21b6e2664acb808a030a0f0264e-1482250909.cn-northwest-1.elb.amazonaws.com.cn",
           "EvaluateTargetHealth": false
         }
       }

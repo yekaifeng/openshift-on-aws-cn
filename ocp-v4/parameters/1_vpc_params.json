@@ -1,7 +1,7 @@
 [
   {
     "ParameterKey": "VpcCidr",
-    "ParameterValue": "10.2.0.0/16"
+    "ParameterValue": "10.7.84.0/24"
   },
   {
     "ParameterKey": "AvailabilityZoneCount",
@@ -9,6 +9,6 @@
   },
   {
     "ParameterKey": "SubnetBits",
-    "ParameterValue": "12"
+    "ParameterValue": "5"
   }
 ]

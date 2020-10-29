@@ -1,30 +1,30 @@
 [
     {
       "ParameterKey": "ClusterName", 
-      "ParameterValue": "greepaas"
+      "ParameterValue": "procloud"
     },
     {
       "ParameterKey": "InfrastructureName", 
-      "ParameterValue": "greepaas-p22mk"
+      "ParameterValue": "procloud-dcxnr"
     },
     {
       "ParameterKey": "HostedZoneId", 
-      "ParameterValue": "Z084846825UVTTL9AENOB"
+      "ParameterValue": "Z09819653O0UB2HYA1CTA"
     },
     {
       "ParameterKey": "HostedZoneName", 
-      "ParameterValue": "openshift.net.cn"
+      "ParameterValue": "greeyun.com"
     },
     {
       "ParameterKey": "PublicSubnets", 
-      "ParameterValue": "subnet-00e0f75140e896e55,subnet-00fdd14eace4ff1c8,subnet-084741d9922927d2f"
+      "ParameterValue": "subnet-013236d23af8c8cab,subnet-0b48857e8e7fd1d85,subnet-04eed02fe761312a6"
     },
     {
       "ParameterKey": "PrivateSubnets", 
-      "ParameterValue": "subnet-0fb444db4d886d009,subnet-0b93e91f943544f44,subnet-0d51f00147f62f9fd"
+      "ParameterValue": "subnet-055c9512402bf32b9,subnet-0d2852b7644c76fcf,subnet-03dda745a6310a17c"
     },
     {
       "ParameterKey": "VpcId", 
-      "ParameterValue": "vpc-0338447deb4628091"
+      "ParameterValue": "vpc-0f8aaa8cd1275f2d0"
     }
   ]

@@ -119,6 +119,8 @@ export AWS_DEFAULT_PROFILE=china
   source: quay.io/openshift-release-dev/ocp-v4.0-art-dev
 ```
 
+* 参考第6点，为BASE_DOMAIN创建hostedZone
+
 * 为镜像仓库创建ELB实例后，执行以下脚本，为镜像仓库创建域名
 
 ```bash

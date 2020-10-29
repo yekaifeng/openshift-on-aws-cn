@@ -137,7 +137,7 @@ Resources:
       - Fn::GetAZs: !Ref "AWS::Region"
       Tags:
       - Key: Name
-        Value: !Sub ${AWS::StackName}-Private-AZ1      
+        Value: !Sub ${AWS::StackName}-Private-AZ1
   PrivateRouteTable:
     Type: "AWS::EC2::RouteTable"
     Properties:
@@ -180,7 +180,7 @@ Resources:
       - Fn::GetAZs: !Ref "AWS::Region"
       Tags:
       - Key: Name
-        Value: !Sub ${AWS::StackName}-Private-AZ2      
+        Value: !Sub ${AWS::StackName}-Private-AZ2
   PrivateRouteTable2:
     Type: "AWS::EC2::RouteTable"
     Condition: DoAz2
@@ -228,7 +228,7 @@ Resources:
       - Fn::GetAZs: !Ref "AWS::Region"
       Tags:
       - Key: Name
-        Value: !Sub ${AWS::StackName}-Private-AZ3      
+        Value: !Sub ${AWS::StackName}-Private-AZ3
   PrivateRouteTable3:
     Type: "AWS::EC2::RouteTable"
     Condition: DoAz3

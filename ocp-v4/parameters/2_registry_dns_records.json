@@ -1,14 +1,14 @@
 {
-  "Comment": "create record set for bastion.openshift.net.cn",
+  "Comment": "create record set for bastion.procloud.greeyun.com",
   "Changes": [
     {
       "Action": "CREATE",
       "ResourceRecordSet": {
-        "Name": "bastion.openshift.net.cn",
+        "Name": "bastion.procloud.greeyun.com",
         "Type": "A",
         "AliasTarget": {
-          "HostedZoneId": "ZM7IZAIOVVDZF",
-          "DNSName": "greepaas-registry-21573367.cn-northwest-1.elb.amazonaws.com.cn",
+          "HostedZoneId": "Z09819653O0UB2HYA1CTA",
+          "DNSName": "ec2-68-79-19-65.cn-northwest-1.compute.amazonaws.com.cn",
           "EvaluateTargetHealth": false
         }
       }

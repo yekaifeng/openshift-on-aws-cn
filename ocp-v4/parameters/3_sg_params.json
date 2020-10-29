@@ -1,18 +1,19 @@
 [
     {
       "ParameterKey": "InfrastructureName", 
-      "ParameterValue": "greepaas-p22mk"
+      "ParameterValue": "procloud-5z52k"
     },
     {
       "ParameterKey": "VpcCidr", 
-      "ParameterValue": "10.2.0.0/16"
+      "ParameterValue": "10.7.84.0/24"
     },
     {
       "ParameterKey": "PrivateSubnets", 
-      "ParameterValue": "subnet-0fb444db4d886d009,subnet-0b93e91f943544f44,subnet-0d51f00147f62f9fd"
+      "ParameterValue": "subnet-055c9512402bf32b9,subnet-0d2852b7644c76fcf,subnet-03dda745a6310a17c"
     },
     {
       "ParameterKey": "VpcId", 
-      "ParameterValue": "vpc-0338447deb4628091"
+      "ParameterValue": "vpc-0f8aaa8cd1275f2d0"
     }
   ]
+
